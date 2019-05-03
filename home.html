@@ -6,7 +6,9 @@
 </head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-    body {font-family: Arial;}
+    body {
+        font-family: Arial;
+    }
 
     /* Style the tab */
     .tab {
@@ -47,28 +49,52 @@
 </style>
 <body>
 <div class="tab">
-    <button class="Student" onclick="open(events,'Student')">Student</button>
-    <button class=Course" onclick="open(events,'Course')">Course</button>
-    <button class="Registered Classes" onclick="open(events,'Registered Classes')">Registered Classes</button>
-    <button class="Instructor" onclick="open(events,'Instructor')">Instructor</button>
-    <button class="Department" onclick="open(events,'Department')">Department</button>
-    <button class="Tuition_Payments" onclick="open(events, 'Tuition Payments')">Tuition Payments</button>
-    <button class="Financial Aid" onclick="open(events,'Financial_Aid')">Financial Aid</button>
+    <button class="Student" onclick="open('Student')">Student</button>
+    <button class=Course" onclick="open('Course')">Course</button>
+    <button class="Registered Classes" onclick="open('Registered Classes')">Registered Classes</button>
+    <button class="Instructor" onclick="open('Instructor')">Instructor</button>
+    <button class="Department" onclick="open('Department')">Department</button>
+    <button class="Tuition_Payments" onclick="open('Tuition Payments')">Tuition Payments</button>
+    <button class="Financial Aid" onclick="open('Financial_Aid')">Financial Aid</button>
 </div>
 <form name="StudentForm">
+    EMPLID:
+    <input type="number" name="emplid" min="00000000" max="99999999"><br>
     First Name:
-    <input type="text" name="fn">
-    <br>
+    <input type="text" name="fn"><br>
     Last Name:
-    <input type="text">
-    <br>
+    <input type="text" name="ln"><br>
+    DOB:
+    <input type="date" name="dob"><br>
+    Credits:
+    <input type="number" name="credits" min="0" max="120"><br>
+    <div>
+        Gender:
+        <input type="radio" id="Male" name="gender">
+        <label for="Male">Male</label>
+        <input type="radio" id="Female" name="gender">
+        <label for="Female">Female</label>
+    </div>
+    Unpaid Tuition:
+    <input type="number" name="ut" min="0"><br>
+    Email:
+    <input type="email" name="email"><br>
+    
     <input type="button" value="Submit" onclick="process()">
+
 </form>
 
 <script type="text/javascript">
-    function process(){
-        var fnVar=document.StudentForm.fn.value;
+    function process() {
+        var fnVar = document.StudentForm.fn.value;
 
+    }
+</script>
+<script>
+    function open(name) {
+        if (name === 'Student') {
+            document.getElementById("StudentForm").style.display = "block";
+        }
     }
 </script>
 </body>
