@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body {font-family: Arial;}
+
+    /* Style the tab */
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+        background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+        background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+<body>
+<div class="tab">
+    <button class="Student" onclick="open(events,'Student')">Student</button>
+    <button class=Course" onclick="open(events,'Course')">Course</button>
+    <button class="Registered Classes" onclick="open(events,'Registered Classes')">Registered Classes</button>
+    <button class="Instructor" onclick="open(events,'Instructor')">Instructor</button>
+    <button class="Department" onclick="open(events,'Department')">Department</button>
+    <button class="Tuition_Payments" onclick="open(events, 'Tuition Payments')">Tuition Payments</button>
+    <button class="Financial Aid" onclick="open(events,'Financial_Aid')">Financial Aid</button>
+</div>
+<form name="StudentForm">
+    First Name:
+    <input type="text" name="fn">
+    <br>
+    Last Name:
+    <input type="text">
+    <br>
+    <input type="button" value="Submit" onclick="process()">
+</form>
+
+<script type="text/javascript">
+    function process(){
+        var fnVar=document.StudentForm.fn.value;
+
+    }
+</script>
+</body>
+</html>
