@@ -1,0 +1,5 @@
+--TEMP SCHEMA - TO BE REPLACED WITH OURS
+
+CREATE TABLE student(
+  emplid int
+);
