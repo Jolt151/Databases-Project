@@ -16,13 +16,18 @@ public class DatabaseImpl {
     }
     
 
-    public int addStudent(){
-        return jdbcTemplate.update("INSERT INTO students (dob, last_name, first_name, credits, gender) VALUES (?, ?, ?, ?, ?);",
+    public int addStudent(Date dob, String last, String first, int credits, String gender){
+        return jdbcTemplate.update("INSERT INTO students (dob, last_name, first_name, credits, gender)" +
+                        " VALUES (?, ?, ?, ?, ?);",
                 new Object[] {new Date()}, "levi", "michael", "85", "male");
     }
 
     public int addCourse(){
-        return 0;
+        return jdbcTemplate.update("INSERT INTO courses (class_number, dept, course_number, " +
+                "class_title, instructor_name, beginning_time, end_time, room, num_credits, section, " +
+                "mode_inst, capacity, semester, si) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                );
+        //return 0;
         //TODO: NOT IMPLEMENTED YET
     }
 
