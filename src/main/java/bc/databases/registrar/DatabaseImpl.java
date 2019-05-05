@@ -17,8 +17,8 @@ public class DatabaseImpl {
     
 
     public int addStudent(){
-        return jdbcTemplate.update("INSERT INTO students dob, last_name, first_name, credits, gender VALUES ?, ?, ?, ?, ?);",
-                new Date(), "levi", "michael", "85", "male");
+        return jdbcTemplate.update("INSERT INTO students (dob, last_name, first_name, credits, gender) VALUES (?, ?, ?, ?, ?);",
+                new Object[] {new Date()}, "levi", "michael", "85", "male");
     }
 
     public int addCourse(){
