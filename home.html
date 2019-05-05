@@ -49,7 +49,7 @@
 </style>
 <body>
 <div class="tab">
-    <button class="Student" onclick="open('Student')">Student</button>
+    <button class="Student">Student</button>
     <button class=Course" onclick="open('Course')">Course</button>
     <button class="Registered Classes" onclick="open('Registered Classes')">Registered Classes</button>
     <button class="Instructor" onclick="open('Instructor')">Instructor</button>
@@ -57,32 +57,43 @@
     <button class="Tuition_Payments" onclick="open('Tuition Payments')">Tuition Payments</button>
     <button class="Financial Aid" onclick="open('Financial_Aid')">Financial Aid</button>
 </div>
-<form name="StudentForm">
-    EMPLID:
-    <input type="number" name="emplid" min="00000000" max="99999999"><br>
-    First Name:
-    <input type="text" name="fn"><br>
-    Last Name:
-    <input type="text" name="ln"><br>
-    DOB:
-    <input type="date" name="dob"><br>
-    Credits:
-    <input type="number" name="credits" min="0" max="120"><br>
-    <div>
-        Gender:
-        <input type="radio" id="Male" name="gender">
-        <label for="Male">Male</label>
-        <input type="radio" id="Female" name="gender">
-        <label for="Female">Female</label>
-    </div>
-    Unpaid Tuition:
-    <input type="number" name="ut" min="0"><br>
-    Email:
-    <input type="email" name="email"><br>
-    
-    <input type="button" value="Submit" onclick="process()">
 
-</form>
+<div class="sf" style="display:none">
+    <form name="StudentForm">
+        EMPLID:
+        <input type="number" name="emplid" min="00000000" max="99999999" minlength="8"><br>
+        First Name:
+        <input type="text" name="fn" maxlength="50"><br>
+        Last Name:
+        <input type="text" name="ln" maxlength="50"><br>
+        DOB:
+        <input type="date" name="dob"><br>
+        Credits:
+        <input type="number" name="credits" min="0" max="120"><br>
+        <div>
+            Gender:
+            <input type="radio" id="Male" name="gender">
+            <label for="Male">Male</label>
+            <input type="radio" id="Female" name="gender">
+            <label for="Female">Female</label>
+        </div>
+        Unpaid Tuition:
+        <input type="number" name="ut" min="0"><br>
+        Email:
+        <input type="email" name="email" maxlength="50"><br>
+        Phone:
+        <input type="number" name="phone" maxlength="10"><br>
+        Starting Semester:
+        <input type="text" name="ss" maxlength="11"><br>
+        Expected Graduation:
+        <input type="date" name="eg"><br>
+        Address:
+        <input type="data" name="address" maxlength="50"><br>
+        Major:
+        <input type="data" name="major" maxlength="50"><br>
+        <input type="button" value="Submit" onclick="process()">
+    </form>
+</div>
 
 <script type="text/javascript">
     function process() {
@@ -90,10 +101,82 @@
 
     }
 </script>
+
+<div class="cf" style="display:none">
+    <form name="CourseForm">
+        Class Number:
+        <input type="number" name="classNumber" min="0" max="99999" minlength="5"><br>
+        Department Name:
+        <input type="text" name="dept" minlength="4" maxlength="4"><br>
+        Course Number:
+        <input type="number" name="courseNum" min="0000" max="9999" minlength="4"><br>
+        Title:
+        <input type="text" name="classTitle" maxlength="50"><br>
+        Instructor Name:
+        <input type="data" name="instructorName" maxlength="50"><br>
+        Time:
+        <input type="time" name="beginningTime">
+        <input type="time" name="endTime"><br>
+        Room:
+        <input type="data" name="room" maxlength="10"><br>
+        Credits:
+        <input type="number" name="numCredits" max="5" min="1"><br>
+        Section:
+        <input type="data" name="section" maxlength="4"><br>
+        Mode of Instruction:
+        <input type="data" name="modeInst" maxlength="20"><br>
+        Class Capacity:
+        <input type="number" name="capacity" max="160" min="25"><br>
+        Semester:
+        <input type="data" name="semester" maxlength="11"><br>
+        Special Information:
+        <input type="data" name="si"><br>
+        <input type="button" value="Submit" onclick="process">
+    </form>
+</div>
+
+<div class="rc" style="display:none">
+    <form name="RegisteredClasses">
+        EMPLID:
+        <input type="number" name="emplid" maxlength="8" min="11111111" max="99999999"><br>
+        Grade:
+        <input type="data" name="grade" maxlength="1">
+        Credits:
+        <input type="number" name="credits" maxlength="1" min="3" max="5"><br>
+        Department:
+        <input type="data" name="dept" maxlength="4" minlength="4"><br>
+        Class Number:
+        <input type="4" name="classNum" minlength="4" maxlength="4"><br>
+    </form>
+</div>
+
+<div class="i">
+    <form name="Instructor">
+        Title:
+        <input typ="data" name="title" maxlength="25"><br>
+        Instructor Name:
+        <input type="data" name="instName" maxlength="50"><br>
+        <div>
+            Gender:
+            <input type="radio" id="Male1" name="gender">
+            <label for="Male">Male</label>
+            <input type="radio" id="Female1" name="gender">
+            <label for="Female">Female</label>
+        </div>
+        Dept:
+        <input type="data" minlength="4" maxlength="4" name="dept"><br>
+        Salary
+        <input data="number" minlength="5" maxlength="7" name="salary"><br>
+    </form>
+</div>
+
 <script>
     function open(name) {
         if (name === 'Student') {
-            document.getElementById("StudentForm").style.display = "block";
+            document.getElementById("StudentForm").style.display = "none";
+        } else if (name === 'Course') {
+            //document.getElementById("CourseForm").style.display="block";
+            alert("Test");
         }
     }
 </script>
