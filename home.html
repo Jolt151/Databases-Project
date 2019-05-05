@@ -150,7 +150,7 @@
     </form>
 </div>
 
-<div class="i">
+<div class="i" style="display:none">
     <form name="Instructor">
         Title:
         <input typ="data" name="title" maxlength="25"><br>
@@ -167,6 +167,41 @@
         <input type="data" minlength="4" maxlength="4" name="dept"><br>
         Salary
         <input data="number" minlength="5" maxlength="7" name="salary"><br>
+    </form>
+</div>
+
+<div class="dept" style="display:none">
+    <form name="department">
+        Department:
+        <input type="data" name="dept" maxlength="4"><br>
+        Department Chair:
+        <input type="data" name="deptHead" maxlength="50"><br>
+        Budget:
+        <input type="number" min="0"><br>
+    </form>
+</div>
+
+<div class="tp" style="display:none">
+    <form name="Tuition Payments">
+        EMPLID:
+        <input type="number" name="emplid" min="00000000" max="99999999" minlength="8"><br>
+        Amount Paid:
+        <input type="number" name="amountPaid" min="0"><br>
+        Date Paid:
+        <input type="date" name="datePaid"><br>
+    </form>
+</div>
+
+<div class="fa" style="display:none">
+    <form name="Financial Aid">
+        EMPLID:
+        <input type="number" name="emplid" min="00000000" max="99999999" minlength="8"><br>
+        Grant Money:
+        <input type="number" name="grantMoney" min="0"><br>
+        Grant Name:
+        <input type="data" name="grantName"><br>
+        Date Applied:
+        <input type="date" name="dateApplied"><br>
     </form>
 </div>
 
