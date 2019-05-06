@@ -43,27 +43,42 @@ public class RestController {
     }
 
     @PostMapping("/rest/addRegisteredClass")
-    public int addRegisteredClass(){
-        return database.addRegisteredClass();
+    public int addRegisteredClass(@RequestParam(name = "emplid", required = true) int emplid,
+                                  @RequestParam(name = "grade", required = true) String grade,
+                                  @RequestParam(name = "credits", required = true) int credits,
+                                  @RequestParam(name = "department", required = true) String department,
+                                  @RequestParam(name = "class_number", required = true) int class_number){
+        return database.addRegisteredClass(emplid, grade, credits, department, class_number);
     }
 
     @PostMapping("/rest/addInstructor")
-    public int addInstructor(){
-        return database.addInstructor();
+    public int addInstructor(@RequestParam(name = "title", required = true) String title,
+                             @RequestParam(name = "instructor_name", required = true) String instructor_name,
+                             @RequestParam(name = "gender", required = true) String gender,
+                             @RequestParam(name = "department", required = true) String department,
+                             @RequestParam(name = "salary", required = true) int salary){
+        return database.addInstructor(title, instructor_name, gender, department, salary);
     }
 
     @PostMapping("/rest/addDepartment")
-    public int addDepartment(){
-        return database.addDepartment();
+    public int addDepartment(@RequestParam(name = "department", required = true) String department,
+                             @RequestParam(name = "department_chair", required = true) String department_chair,
+                             @RequestParam(name = "budget", required = true) int budget){
+        return database.addDepartment(department, department_chair, budget);
     }
 
     @PostMapping("/rest/addTuitionPayment")
-    public int addTuitionPayment(){
-        return database.addTuitionPayment();
+    public int addTuitionPayment(@RequestParam(name = "emplid", required = true) int emplid,
+                                 @RequestParam(name = "amount_paid", required = true) int amount_paid,
+                                 @RequestParam(name = "date_paid", required = true) Date date_paid){
+        return database.addTuitionPayment(emplid, amount_paid, date_paid);
     }
 
     @PostMapping("/rest/addFinancialAid")
-    public int addFinancialAid(){
-        return database.addFinancialAid();
+    public int addFinancialAid(@RequestParam(name = "emplid", required = true) int emplid,
+                               @RequestParam(name = "grant_money", required = true) int grant_money,
+                               @RequestParam(name = "grant_name", required = true) String grant_name,
+                               @RequestParam(name = "date_applied", required = true) Date date_applied){
+        return database.addFinancialAid(emplid, grant_money, grant_name, date_applied);
     }
 }
