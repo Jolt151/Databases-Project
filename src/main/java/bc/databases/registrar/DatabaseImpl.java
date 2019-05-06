@@ -22,13 +22,15 @@ public class DatabaseImpl {
                 new Object[] {new Date()}, "levi", "michael", "85", "male");
     }
 
-    public int addCourse(){
+    public int addCourse(int class_number, String dept, int course_number, String class_title,
+                         String instructor_name, String beginning_time, String end_time, String room,
+                         int num_credits, String section, String mode_inst, int capacity, String semester, String si){
         return jdbcTemplate.update("INSERT INTO courses (class_number, dept, course_number, " +
                 "class_title, instructor_name, beginning_time, end_time, room, num_credits, section, " +
-                "mode_inst, capacity, semester, si) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                "mode_inst, capacity, semester, si) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                class_number, dept, course_number, class_title, instructor_name, beginning_time, end_time,
+                room, num_credits, section, mode_inst, capacity, semester, si
                 );
-        //return 0;
-        //TODO: NOT IMPLEMENTED YET
     }
 
     public int addRegisteredClass(){
