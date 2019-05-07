@@ -3,6 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
+    <script>
+        function a(){
+            var b = new XMLHttpRequest();
+            var params2 = "department=" + document.getElementById("department_department").value
+                + "&department_chair=" + document.getElementById("department_chair").value +
+                    "&budget=" + document.getElementById("department_budget").value;
+            console.log(params2)
+            b.open("POST", "/rest/addDepartment", true);
+            b.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            b.send(params2);
+            b.onreadystatechange = function (ev) {
+                alert(b.responseText);
+            }
+        }
+
+            function send(address, parameters){
+                var xml = new XMLHttpRequest();
+                var a = "";
+                parameters.forEach(function(element){
+                    a += element + "&";
+                })
+                xml.open("POST", address, true);
+                b.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    b.send(params2);
+                    b.onreadystatechange = function (ev) {
+                        alert(b.responseText);
+                    }
+            }  
+
+    </script>
 </head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -170,14 +200,18 @@
     </form>
 </div>
 
-<div class="dept" style="display:none">
-    <form name="department">
+<div class="dept">
+    <form name="department" method="post">
         Department:
-        <input type="data" name="dept" maxlength="4"><br>
+        <input id="department_department" type="data" name="department" maxlength="4"><br>
         Department Chair:
-        <input type="data" name="deptHead" maxlength="50"><br>
+        <input id="department_chair" type="data" name="department" maxlength="50"><br>
         Budget:
-        <input type="number" min="0"><br>
+        <input id="department_budget" type="number" min="0"><br>
+        <input type="button" value="submit" onclick="
+            var arr = new Array(document.getElementById('department_department').value, document.getElementById('department_chair').value, document.getElementById('department_budget'));
+            send("/rest/addDepartment", arr)
+        ">
     </form>
 </div>
 

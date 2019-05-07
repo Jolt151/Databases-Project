@@ -1,8 +1,10 @@
 package bc.databases.registrar;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @org.springframework.web.bind.annotation.RestController
@@ -64,6 +66,7 @@ public class RestController {
     public int addDepartment(@RequestParam(name = "department", required = true) String department,
                              @RequestParam(name = "department_chair", required = true) String department_chair,
                              @RequestParam(name = "budget", required = true) int budget){
+
         return database.addDepartment(department, department_chair, budget);
     }
 
@@ -78,7 +81,10 @@ public class RestController {
     public int addFinancialAid(@RequestParam(name = "emplid", required = true) int emplid,
                                @RequestParam(name = "grant_money", required = true) int grant_money,
                                @RequestParam(name = "grant_name", required = true) String grant_name,
-                               @RequestParam(name = "date_applied", required = true) Date date_applied){
+                               @RequestParam(name = "date_applied", required = true) @DateTimeFormat(pattern = "yyyy-MM-dd") Date date_applied){
+
+        //date_applied = new SimpleDateFormat("yyyy-MM-dd").parse(date_applied);
+
         return database.addFinancialAid(emplid, grant_money, grant_name, date_applied);
     }
 }
