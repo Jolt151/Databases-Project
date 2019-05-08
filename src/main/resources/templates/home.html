@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Data Insertion</title>
     <script>
         function send(address, parameters) {
             var xml = new XMLHttpRequest();
@@ -19,8 +19,64 @@
         }
     </script>
 </head>
+<style> body {
+    font-family: Arial;
+}
 
+.tab {
+
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+
+}
+
+
+/* Style the buttons inside the tab */
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+
+/* Change background color of buttons on hover */
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+
+/* Style the tab content */
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+</style>
 <body>
+
+<div class="tab">
+    <Button class="InsertingData" onclick="location.href='home.html'"> Data Insertion</Button>
+    <Button class="ExtractingData" onclick="location.href='extractingData.html'">Data Extraction</Button>
+</div>
+
+<br>
+
 <b>Student Form:</b>
 <form name="StudentForm">
     EMPLID:
@@ -36,9 +92,9 @@
     <div>
         Gender:
         <input type="radio" id="StudentForm_Male" name="gender" value="Male">
-        <label for="Male">Male</label>
+        <label for="StudentForm_Male">Male</label>
         <input type="radio" id="StudentForm_Female" name="gender" value="Female">
-        <label for="Female">Female</label>
+        <label for="StudentForm_Female">Female</label>
     </div>
     Unpaid Tuition:
     <input type="number" id="StudentForm_ut" min="0"><br>
@@ -143,9 +199,9 @@
     <div>
         Gender:
         <input type="radio" id="instructor_male" name="gender" value="Male">
-        <label for="Male">Male</label>
+        <label for="instructor_male">Male</label>
         <input type="radio" id="instructor_female" name="gender" value="Female">
-        <label for="Female">Female</label>
+        <label for="instructor_female">Female</label>
     </div>
     Department:
     <input type="data" minlength="4" maxlength="4" id="instructor_dept"><br>
@@ -188,10 +244,48 @@
     Date Paid:
     <input type="date" id="TuitionPayment_datePaid"><br>
     <input type="button" value="Submit" onclick="
+    checkTPForm();
+    if(checkTPForm()===true){
     let arr=[document.getElementById('TuitionPayments_emplid').value, document.getElementById('TuitionPayment_amountPaid').value,
     document.getElementById('TuitionPayment_datePaid').value];
-    send('/rest/addTuitionPayment', arr);">
+    send('/rest/addTuitionPayment', arr);
+    }">
 </form>
+
+<script>
+    function checkTPForm() {
+        var emplid = document.getElementById('TuitionPayments_emplid').value;
+        var grantMoney= document.getElementById('TuitionPayment_amountPaid').value;
+        var dateApplied = document.getElementById('TuitionPayment_datePaid').value;
+
+        if (emplid.toString().length === 0) {
+            alert("Enter an EMPLID");
+            return false;
+        } else if (emplid.toString().length != 8) {
+            alert("Invalid EMPLID");
+            return false;
+        }
+        if (grantMoney < 0) {
+            alert("Money can not be negative");
+            return false;
+        }
+        var today = new Date();
+        var year = dateApplied.toString().substring(0, 4);
+        var month = dateApplied.toString().substring(5, 7);
+        var day = dateApplied.toString().substring(8, 10);
+        if (year > today.getFullYear()) {
+            alert("Date can not be in the future");
+            return false;
+        } else if (month > today.getMonth()) {
+            alert("Date can not be in the future");
+            return false;
+        } else if (month < today.getMonth() && day > today.getDay()) {
+            alert("Date can not be in the future");
+            return false;
+        }
+        return true;
+    }
+</script>
 
 <br>
 <b>Financial Aid:</b>
@@ -227,13 +321,23 @@
             alert("Invalid EMPLID");
             return false;
         }
-        if (grantMoney > 0) {
+        if (grantMoney < 0) {
             alert("Money can not be negative");
             return false;
         }
         var today = new Date();
-        if(dateApplied>today.getFullYear()){
+        var year = dateApplied.toString().substring(0, 4);
+        var month = dateApplied.toString().substring(5, 7);
+        var day = dateApplied.toString().substring(8, 10);
+        if (year > today.getFullYear()) {
             alert("Date can not be in the future");
+            return false;
+        } else if (month > today.getMonth() && year==today.getFullYear()) {
+            alert("Date can not be in the future");
+            return false;
+        } else if (month < today.getMonth() && day > today.getDay() && year==today.getFullYear()) {
+            alert("Date can not be in the future");
+            return false;
         }
         return true;
     }
