@@ -1,5 +1,6 @@
 package bc.databases.registrar;
 
+import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,12 +18,20 @@ public class RestController {
     }
 
     @PostMapping("/rest/addStudent")
-    public int addStudent(@RequestParam(name = "dob", required = true) Date dob,
-                          @RequestParam(name = "last", required = true) String first,
-                          @RequestParam(name = "first", required = true) String last,
+    public int addStudent(@RequestParam(name = "emplid", required = true) int emplid,
+                          @RequestParam(name = "last_name", required = true) String last_name,
+                          @RequestParam(name = "first_name", required = true) String first_name,
+                          @RequestParam(name = "dob", required = true) Date dob,
                           @RequestParam(name = "credits", required = true) int credits,
-                          @RequestParam(name = "gender", required = true) String gender){
-        return database.addStudent(dob, first, last, credits, gender);
+                          @RequestParam(name = "gender", required = true) String gender,
+                          @RequestParam(name = "unpaid_tuition", required = true) int unpaid_tuition,
+                          @RequestParam(name = "email", required = true) String email,
+                          @RequestParam(name = "phone", required = true) String phone,
+                          @RequestParam(name = "starting_semester", required = true) String startting_semester,
+                          @RequestParam(name = "expected_graduation", required = true) String expected_graduation,
+                          @RequestParam(name = "address", required = true) String address,
+                          @RequestParam(name = "major", required = true) String major){
+        return database.addStudent(emplid, last_name, first_name, dob, credits, gender, unpaid_tuition, email, phone, startting_semester, expected_graduation, address, major);
     }
 
     @PostMapping("/rest/addCourse")
