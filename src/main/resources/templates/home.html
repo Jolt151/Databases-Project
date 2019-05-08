@@ -2,252 +2,242 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Home Page</title>
+    <title>Home</title>
     <script>
-        function a(){
-            var b = new XMLHttpRequest();
-            var params2 = "department=" + document.getElementById("department_department").value
-                + "&department_chair=" + document.getElementById("department_chair").value +
-                    "&budget=" + document.getElementById("department_budget").value;
-            console.log(params2)
-            b.open("POST", "/rest/addDepartment", true);
+        function send(address, parameters) {
+            var xml = new XMLHttpRequest();
+            var a = "";
+            parameters.forEach(function (element) {
+                a += element + "&";
+            });
+            xml.open("POST", address, true);
             b.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             b.send(params2);
             b.onreadystatechange = function (ev) {
                 alert(b.responseText);
             }
         }
-
-            function send(address, parameters){
-                var xml = new XMLHttpRequest();
-                var a = "";
-                parameters.forEach(function(element){
-                    a += element + "&";
-                })
-                xml.open("POST", address, true);
-                b.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    b.send(params2);
-                    b.onreadystatechange = function (ev) {
-                        alert(b.responseText);
-                    }
-            }  
-
     </script>
 </head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-    body {
-        font-family: Arial;
-    }
 
-    /* Style the tab */
-    .tab {
-        overflow: hidden;
-        border: 1px solid #ccc;
-        background-color: #f1f1f1;
-    }
-
-    /* Style the buttons inside the tab */
-    .tab button {
-        background-color: inherit;
-        float: left;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: 14px 16px;
-        transition: 0.3s;
-        font-size: 17px;
-    }
-
-    /* Change background color of buttons on hover */
-    .tab button:hover {
-        background-color: #ddd;
-    }
-
-    /* Create an active/current tablink class */
-    .tab button.active {
-        background-color: #ccc;
-    }
-
-    /* Style the tab content */
-    .tabcontent {
-        display: none;
-        padding: 6px 12px;
-        border: 1px solid #ccc;
-        border-top: none;
-    }
-</style>
 <body>
-<div class="tab">
-    <button class="Student">Student</button>
-    <button class="Course" onclick="open('Course')">Course</button>
-    <button class="Registered Classes" onclick="open('Registered Classes')">Registered Classes</button>
-    <button class="Instructor" onclick="open('Instructor')">Instructor</button>
-    <button class="Department" onclick="open('Department')">Department</button>
-    <button class="Tuition_Payments" onclick="open('Tuition Payments')">Tuition Payments</button>
-    <button class="Financial Aid" onclick="open('Financial_Aid')">Financial Aid</button>
-</div>
+<b>Student Form:</b>
+<form name="StudentForm">
+    EMPLID:
+    <input type="number" id="StudentForm_emplid" min="00000000" max="99999999" minlength="8"><br>
+    Last Name:
+    <input type="text" id="StudentForm_ln" maxlength="50"><br>
+    First Name:
+    <input type="text" id="StudentForm_fn" maxlength="50"><br>
+    DOB:
+    <input type="date" id="StudentForm_dob"><br>
+    Credits:
+    <input type="number" id="StudentForm_credits" min="0" max="120"><br>
+    <div>
+        Gender:
+        <input type="radio" id="StudentForm_Male" name="gender" value="Male">
+        <label for="Male">Male</label>
+        <input type="radio" id="StudentForm_Female" name="gender" value="Female">
+        <label for="Female">Female</label>
+    </div>
+    Unpaid Tuition:
+    <input type="number" id="StudentForm_ut" min="0"><br>
+    Email:
+    <input type="email" id="StudentForm_email" maxlength="50"><br>
+    Phone:
+    <input type="number" id="StudentForm_phone" maxlength="10"><br>
+    Starting Semester:
+    <input type="text" id="StudentForm_ss" maxlength="11"><br>
+    Expected Graduation:
+    <input type="date" id="StudentForm_eg"><br>
+    Address:
+    <input type="data" id="StudentForm_address" maxlength="50"><br>
+    Major:
+    <input type="data" id="StudentForm_major" maxlength="50"><br>
+    <input type="button" value="Submit" onclick="
 
-<div class="sf" style="display:none">
-    <form name="StudentForm">
-        EMPLID:
-        <input type="number" name="emplid" min="00000000" max="99999999" minlength="8"><br>
-        First Name:
-        <input type="text" name="fn" maxlength="50"><br>
-        Last Name:
-        <input type="text" name="ln" maxlength="50"><br>
-        DOB:
-        <input type="date" name="dob"><br>
-        Credits:
-        <input type="number" name="credits" min="0" max="120"><br>
-        <div>
-            Gender:
-            <input type="radio" id="Male" name="gender">
-            <label for="Male">Male</label>
-            <input type="radio" id="Female" name="gender">
-            <label for="Female">Female</label>
-        </div>
-        Unpaid Tuition:
-        <input type="number" name="ut" min="0"><br>
-        Email:
-        <input type="email" name="email" maxlength="50"><br>
-        Phone:
-        <input type="number" name="phone" maxlength="10"><br>
-        Starting Semester:
-        <input type="text" name="ss" maxlength="11"><br>
-        Expected Graduation:
-        <input type="date" name="eg"><br>
-        Address:
-        <input type="data" name="address" maxlength="50"><br>
-        Major:
-        <input type="data" name="major" maxlength="50"><br>
-        <input type="button" value="Submit" onclick="process()">
-    </form>
-</div>
+    var selectedGender;
+        if(document.getElementById('StudentForm_Male').checked){
+            selectedGender=document.getElementById('StudentForm_Male').value;
+        }
+        else selectedGender=document.getElementById('StudentForm_Female').value;
 
-<script type="text/javascript">
-    function process() {
-        var fnVar = document.StudentForm.fn.value;
+     let arr = [document.getElementById('StudentForm_emplid').value, document.getElementById('StudentForm_ln').value,
+     document.getElementById('StudentForm_fn').value, document.getElementById('StudentForm_ln').value,
+     document.getElementById('StudentForm_dob').value, document.getElementById('StudentForm_credits').value, selectedGender,
+     document.getElementById('StudentForm_ut').value, document.getElementById('StudentForm_email').value,
+     document.getElementById('StudentForm_phone').value, document.getElementById('StudentForm_ss').value,
+     document.getElementById('StudentForm_eg').value, document.getElementById('StudentForm_address').value,
+     document.getElementById('StudentForm_major').value];
+     send('/rest/addStudent',arr);">
+</form>
 
-    }
-</script>
+<br>
+<b>Course Form:</b>
+<form name="CourseForm">
+    Class Number:
+    <input type="number" id="CourseForm_classNumber" min="0" max="99999" minlength="5"><br>
+    Department Name:
+    <input type="text" id="CourseForm_dept" minlength="4" maxlength="4"><br>
+    Course Number:
+    <input type="number" id="CourseForm_courseNum" min="0000" max="9999" minlength="4"><br>
+    Title:
+    <input type="text" id="CourseForm_classTitle" maxlength="50"><br>
+    Instructor Name:
+    <input type="data" id="CourseForm_instructorName" maxlength="50"><br>
+    Time:
+    <input type="time" id="CourseForm_beginningTime">
+    <input type="time" id="CourseForm_endTime"><br>
+    Room:
+    <input type="data" id="CourseForm_room" maxlength="10"><br>
+    Credits:
+    <input type="number" id="CourseForm_numCredits" max="5" min="1"><br>
+    Section:
+    <input type="data" id="CourseForm_section" maxlength="4"><br>
+    Mode of Instruction:
+    <input type="data" id="CourseForm_modeInst" maxlength="20"><br>
+    Class Capacity:
+    <input type="number" id="CourseForm_capacity" max="160" min="25"><br>
+    Semester:
+    <input type="data" id="CourseForm_semester" maxlength="11"><br>
+    Special Information:
+    <input type="data" id="CourseForm_si"><br>
+    <input type="button" value="Submit" onclick="
+        let arr=[document.getElementById('CourseForm_classNumber').value, document.getElementById('CourseForm_dept').value,
+        document.getElementById('CourseForm_courseNum').value, document.getElementById('CourseForm_classTitle').value,
+        document.getElementById('CourseForm_instructorName').value, document.getElementById('CourseForm_beginningTime').value,
+        document.getElementById('CourseForm_room').value, document.getElementById('CourseForm_numCredts').value,
+        document.getElementById('CourseForm_section').value, document.getElementById('CourseForm_modeInst').value,
+        document.getElementById('CourseForm_capacity').value, document.getElementById('CourseForm_semester'),
+        document.getElementById('CourseForm_si').value];
+        send('/rest/addCourse', arr);">
+</form>
 
-<div class="cf" style="display:none">
-    <form name="CourseForm">
-        Class Number:
-        <input type="number" name="classNumber" min="0" max="99999" minlength="5"><br>
-        Department Name:
-        <input type="text" name="dept" minlength="4" maxlength="4"><br>
-        Course Number:
-        <input type="number" name="courseNum" min="0000" max="9999" minlength="4"><br>
-        Title:
-        <input type="text" name="classTitle" maxlength="50"><br>
-        Instructor Name:
-        <input type="data" name="instructorName" maxlength="50"><br>
-        Time:
-        <input type="time" name="beginningTime">
-        <input type="time" name="endTime"><br>
-        Room:
-        <input type="data" name="room" maxlength="10"><br>
-        Credits:
-        <input type="number" name="numCredits" max="5" min="1"><br>
-        Section:
-        <input type="data" name="section" maxlength="4"><br>
-        Mode of Instruction:
-        <input type="data" name="modeInst" maxlength="20"><br>
-        Class Capacity:
-        <input type="number" name="capacity" max="160" min="25"><br>
-        Semester:
-        <input type="data" name="semester" maxlength="11"><br>
-        Special Information:
-        <input type="data" name="si"><br>
-        <input type="button" value="Submit" onclick="process">
-    </form>
-</div>
+<br>
+<b>Registered Classes:</b>
+<form name="RegisteredClasses">
+    EMPLID:
+    <input type="number" id="RegisteredClasses_emplid" maxlength="8" min="11111111" max="99999999"><br>
+    Grade:
+    <input type="data" id="RegisteredClasses_grade" maxlength="1"><br>
+    Credits:
+    <input type="number" id="RegisteredClasses_credits" maxlength="1" min="3" max="5"><br>
+    Department:
+    <input type="data" id="RegisteredClasses_dept" maxlength="4" minlength="4"><br>
+    Class Number:
+    <input type="4" id="RegisteredClasses_classNum" minlength="4" maxlength="4"><br>
+    <input type="button" value="Submit" onclick="
+    let arr=[document.getElementById('RegisteredClasses_emplid').value, document.getElementById('RegisteredClasses_grade').value,
+    document.getElementById('RegisteredClasses_credits').value, document.getElementById('RegisteredClasses_dept').value,
+    document.getElementById('RegisteredClasses_classNum').value];
+    send('/rest/addRegisteredClass', arr);"><br>
+</form>
 
-<div class="rc" style="display:none">
-    <form name="RegisteredClasses">
-        EMPLID:
-        <input type="number" name="emplid" maxlength="8" min="11111111" max="99999999"><br>
-        Grade:
-        <input type="data" name="grade" maxlength="1">
-        Credits:
-        <input type="number" name="credits" maxlength="1" min="3" max="5"><br>
-        Department:
-        <input type="data" name="dept" maxlength="4" minlength="4"><br>
-        Class Number:
-        <input type="4" name="classNum" minlength="4" maxlength="4"><br>
-    </form>
-</div>
+<br>
+<b>Instructor:</b>
+<form name="Instructor">
+    Title:
+    <input type="data" id="instructor_title" maxlength="25"><br>
+    Instructor Name:
+    <input type="data" id="instructor_name" maxlength="50"><br>
+    <div>
+        Gender:
+        <input type="radio" id="instructor_male" name="gender" value="Male">
+        <label for="Male">Male</label>
+        <input type="radio" id="instructor_female" name="gender" value="Female">
+        <label for="Female">Female</label>
+    </div>
+    Department:
+    <input type="data" minlength="4" maxlength="4" id="instructor_dept"><br>
+    Salary
+    <input data="number" minlength="5" maxlength="7" id="instructor_salary"><br>
+    <input type="button" value="Submit" onclick="
+        var selectedGender;
+        if(document.getElementById('instructor_male').checked){
+            selectedGender=document.getElementById('instructor_male').value;
+        }
+        else selectedGender=document.getElementById('instructor_female').value;
 
-<div class="i" style="display:none">
-    <form name="Instructor">
-        Title:
-        <input typ="data" name="title" maxlength="25"><br>
-        Instructor Name:
-        <input type="data" name="instName" maxlength="50"><br>
-        <div>
-            Gender:
-            <input type="radio" id="Male1" name="gender">
-            <label for="Male">Male</label>
-            <input type="radio" id="Female1" name="gender">
-            <label for="Female">Female</label>
-        </div>
-        Dept:
-        <input type="data" minlength="4" maxlength="4" name="dept"><br>
-        Salary
-        <input data="number" minlength="5" maxlength="7" name="salary"><br>
-    </form>
-</div>
+        let arr=[document.getElementById('instructor_title').value, document.getElementById('instructor_name').value,
+        selectedGender, document.getElementById('instructor_dept').value, document.getElementById('instructor_salary').value];
+        send('/rest/addInstructor',arr);">
+    <br>
+</form>
 
-<div class="dept">
-    <form name="department" method="post">
-        Department:
-        <input id="department_department" type="data" name="department" maxlength="4"><br>
-        Department Chair:
-        <input id="department_chair" type="data" name="department" maxlength="50"><br>
-        Budget:
-        <input id="department_budget" type="number" min="0"><br>
-        <input type="button" value="submit" onclick="
-            var arr = new Array(document.getElementById('department_department').value, document.getElementById('department_chair').value, document.getElementById('department_budget'));
-            send("/rest/addDepartment", arr)
-        ">
-    </form>
-</div>
+<br>
+<b>Department:</b>
+<form name="department" method="post">
+    Department:
+    <input id="department_department" type="data" maxlength="4"><br>
+    Department Chair:
+    <input id="department_chair" type="data" maxlength="50"><br>
+    Budget:
+    <input id="department_budget" type="number" min="0"><br>
+    <input type="button" value="Submit" onclick="
+            let arr = [document.getElementById('department_department').value, document.getElementById('department_chair').value, document.getElementById('department_budget').value];
+            send('/rest/addDepartment', arr);">
+</form>
 
-<div class="tp" style="display:none">
-    <form name="Tuition Payments">
-        EMPLID:
-        <input type="number" name="emplid" min="00000000" max="99999999" minlength="8"><br>
-        Amount Paid:
-        <input type="number" name="amountPaid" min="0"><br>
-        Date Paid:
-        <input type="date" name="datePaid"><br>
-    </form>
-</div>
+<br>
+<b>Tuition Payments:</b>
+<form name="Tuition Payments">
+    EMPLID:
+    <input type="number" id="TuitionPayments_emplid" min="00000000" max="99999999" minlength="8"><br>
+    Amount Paid:
+    <input type="number" id="TuitionPayment_amountPaid" min="0"><br>
+    Date Paid:
+    <input type="date" id="TuitionPayment_datePaid"><br>
+    <input type="button" value="Submit" onclick="
+    let arr=[document.getElementById('TuitionPayments_emplid').value, document.getElementById('TuitionPayment_amountPaid').value,
+    document.getElementById('TuitionPayment_datePaid').value];
+    send('/rest/addTuitionPayment', arr);">
+</form>
 
-<div class="fa" style="display:none">
-    <form name="Financial Aid">
-        EMPLID:
-        <input type="number" name="emplid" min="00000000" max="99999999" minlength="8"><br>
-        Grant Money:
-        <input type="number" name="grantMoney" min="0"><br>
-        Grant Name:
-        <input type="data" name="grantName"><br>
-        Date Applied:
-        <input type="date" name="dateApplied"><br>
-    </form>
-</div>
+<br>
+<b>Financial Aid:</b>
+<form name="Financial Aid">
+    EMPLID:
+    <input type="number" id="FinancialAid_emplid" min="00000000" max="99999999" minlength="8"><br>
+    Grant Money:
+    <input type="number" id="FinancialAid_grantMoney" min="0"><br>
+    Grant Name:
+    <input type="data" id="FinancialAid_grantName"><br>
+    Date Applied:
+    <input type="date" id="FinancialAid_dateApplied"><br>
+    <input type="button" value="Submit" onclick="
+    checkFinAidForm();
+    if(checkFinAidForm()===true){
+    let arr=[document.getElementById('FinancialAid_emplid').value, document.getElementById(
+        'FinancialAid_grantMoney').value, document.getElementById('FinancialAid_grantName').value, document.getElementById('FinancialAid_dateApplied').value];
+    send('/rest/addFinancialAid',arr);
+    }"><br>
+</form>
 
 <script>
-    function open(name) {
-        if (name === 'Student') {
-            document.getElementById("StudentForm").style.display = "none";
-        } else if (name === 'Course') {
-            //document.getElementById("CourseForm").style.display="block";
-            alert("Test");
+    function checkFinAidForm() {
+        var emplid = document.getElementById('FinancialAid_emplid').value;
+        var grantMoney = document.getElementById('FinancialAid_grantMoney').value;
+        var dateApplied = document.getElementById('FinancialAid_dateApplied').value;
+
+        if(emplid.toString().length===0) {
+            alert("Enter an EMPLID");
+            return false;
         }
+        else if (emplid.toString().length != 8){
+            alert("Invalid EMPLID");
+            return false;
+        }
+        if (grantMoney > 0) {
+            alert("Money can not be negative");
+            return false;
+        }
+        var today = new Date();
+        if(dateApplied>today.getFullYear()){
+            alert("Date can not be in the future");
+        }
+        return true;
     }
 </script>
+
 </body>
 </html>
