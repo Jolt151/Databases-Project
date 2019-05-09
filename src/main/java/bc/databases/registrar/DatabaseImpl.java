@@ -26,7 +26,7 @@ public class DatabaseImpl {
 
     public int addStudent(int emplid, String last_name, String first_name, Date dob, int credits, String gender, int unpaid_tuition, String email, String phone,
                           String starting_semester, String expected_graduation, String address, String major){
-        return jdbcTemplate.update("INSERT INTO students (emplid, last_name, first_name, dob, credits, gender, unpaid_tuition, email, phone, starting_semester," +
+        return jdbcTemplate.update("INSERT INTO student (emplid, last_name, first_name, dob, credits, gender, unpaid_tuition, email, phone, starting_semester," +
                         " expected_graduation, address, major)" +
                         " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
                 emplid, last_name, first_name, dob, credits, gender, unpaid_tuition, email, phone, starting_semester, expected_graduation, address, major);
@@ -35,7 +35,7 @@ public class DatabaseImpl {
     public int addCourse(int class_number, String dept, int course_number, String class_title,
                          String instructor_name, String beginning_time, String end_time, String room,
                          int num_credits, String section, String mode_inst, int capacity, String semester, String si){
-        return jdbcTemplate.update("INSERT INTO courses (class_number, dept, course_number, " +
+        return jdbcTemplate.update("INSERT INTO course (class_number, dept, course_number, " +
                 "class_title, instructor_name, beginning_time, end_time, room, num_credits, section, " +
                 "mode_inst, capacity, semester, si) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 class_number, dept, course_number, class_title, instructor_name, beginning_time, end_time,
@@ -84,7 +84,7 @@ public class DatabaseImpl {
     }
 
     public List<Financial_Aid> getFinancialAid(){
-        return jdbcTemplate.query("SELECT * FROM FINANCIAL_AID", new RowMapper<Financial_Aid>() {
+        return jdbcTemplate.query("SELECT * FROM FINANICAL_AID", new RowMapper<Financial_Aid>() {
             @Override
             public Financial_Aid mapRow(ResultSet resultSet, int i) throws SQLException {
                 Financial_Aid financial_aid = new Financial_Aid();
@@ -111,7 +111,7 @@ public class DatabaseImpl {
     }
 
     public List<Instructor> getInstructors(){
-        return jdbcTemplate.query("SELECT * FROM INSTRUCTORS", new RowMapper<Instructor>() {
+        return jdbcTemplate.query("SELECT * FROM INSTRUCTOR", new RowMapper<Instructor>() {
             @Override
             public Instructor mapRow(ResultSet resultSet, int i) throws SQLException {
                 Instructor instructor = new Instructor();
