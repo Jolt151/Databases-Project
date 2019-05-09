@@ -1,10 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Extracting Data</title>
 </head>
 <body>
+<table>
+    <thead>
+    <tr>
+        <th>Deparment</th>
+        <th>Chair</th>
+        <th>Budget</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="dept : ${departments}">
+        <td th:text="${dept.department}">Text ...</td>
+        <td th:text="${dept.department_chair}">Text ...</td>
+        <td th:text="${dept.budget}">Text ...</td>
+    </tr>
+    </tbody>
+</table>
 
+<table>
+    <thead>
+    <tr>
+        <th>Emplid</th>
+        <th>Grant Money</th>
+        <th>Grant Name</th>
+        <th>Date Applied</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="fin : ${finAids}">
+        <td th:text="${fin.emplid}">Text ...</td>
+        <td th:text="${fin.grant_money}">Text ...</td>
+        <td th:text="${fin.grant_name}">Text ...</td>
+        <td th:text="${fin.date_applied}">Text ...</td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr>
+        <th>Emplid</th>
+        <th>Amount Paid</th>
+        <th>Date Paid</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="t : ${tuition}">
+        <td th:text="${t.emplid}">Text ...</td>
+        <td th:text="${t.amount_paid}">Text ...</td>
+        <td th:text="${t.date_paid}">Text ...</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

@@ -1,10 +1,19 @@
 package bc.databases.registrar;
 
+import bc.databases.registrar.objects.Department;
+import bc.databases.registrar.objects.Financial_Aid;
+import bc.databases.registrar.objects.Tuition_Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public class DatabaseImpl {
@@ -14,7 +23,8 @@ public class DatabaseImpl {
     public DatabaseImpl(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
-    
+
+    //METHODS FOR ADDING TO DATABASE
 
     public int addStudent(int emplid, String last_name, String first_name, Date dob, int credits, String gender, int unpaid_tuition, String email, String phone,
                           String starting_semester, String expected_graduation, String address, String major){
@@ -58,5 +68,50 @@ public class DatabaseImpl {
     public int addFinancialAid(int emplid, int grant_money, String grant_name, Date date_applied){
         return jdbcTemplate.update("INSERT INTO FINANICAL_AID(EMPLID, GRANT_MONEY, GRANT_NAME, DATE_APPLIED) VALUES " +
                 "(?, ?, ?, ?)", emplid, grant_money, grant_name, date_applied);
+    }
+
+    //METHODS FOR RETURNING ROWS FROM THE TABLE
+    public SqlRowSet getStudents(){
+        return jdbcTemplate.queryForRowSet("SELECT * FROM STUDENT");
+    }
+
+    public List<Department> getDepartments(){
+        return jdbcTemplate.query("SELECT * FROM DEPARTMENT", new RowMapper<Department>() {
+            @Override
+            public Department mapRow(ResultSet resultSet, int i) throws SQLException {
+                Department department = new Department();
+                department.setDepartment(resultSet.getString("DEPARTMENT"));
+                department.setDepartment_chair(resultSet.getString("DEPARTMENT_CHAIR"));
+                department.setBudget(resultSet.getInt("BUDGET"));
+                return department;
+            }
+        });
+    }
+
+    public List<Financial_Aid> getFinancialAid(){
+        return jdbcTemplate.query("SELECT * FROM FINANCIAL_AID", new RowMapper<Financial_Aid>() {
+            @Override
+            public Financial_Aid mapRow(ResultSet resultSet, int i) throws SQLException {
+                Financial_Aid financial_aid = new Financial_Aid();
+                financial_aid.setEmplid(resultSet.getInt("EMPLID"));
+                financial_aid.setGrant_money(resultSet.getInt("GRANT_MONEY"));
+                financial_aid.setGrant_name(resultSet.getString("GRANT_NAME"));
+                financial_aid.setDate_applied(resultSet.getDate("date_applied"));
+                return financial_aid;
+            }
+        });
+    }
+
+    public List<Tuition_Payment> getTuition_Payments(){
+        return jdbcTemplate.query("SELECT * FROM TUITION_PAYMENTS", new RowMapper<Tuition_Payment>() {
+            @Override
+            public Tuition_Payment mapRow(ResultSet resultSet, int i) throws SQLException {
+                Tuition_Payment tuition_payment = new Tuition_Payment();
+                tuition_payment.setEmplid(resultSet.getInt("EMPLID"));
+                tuition_payment.setAmount_paid(resultSet.getInt("AMOUNT_PAID"));
+                tuition_payment.setDate_paid(resultSet.getDate("DATE_PAID"));
+                return tuition_payment;
+            }
+        });
     }
 }
