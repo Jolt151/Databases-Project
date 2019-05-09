@@ -1,8 +1,6 @@
 package bc.databases.registrar;
 
-import bc.databases.registrar.objects.Department;
-import bc.databases.registrar.objects.Financial_Aid;
-import bc.databases.registrar.objects.Tuition_Payment;
+import bc.databases.registrar.objects.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Controller;
@@ -38,6 +36,18 @@ public class SiteController {
 
         List<Tuition_Payment> tuition_payments = database.getTuition_Payments();
         model.addAttribute("tuition", tuition_payments);
+
+        List<Registered_Classes> classes = database.getRegisteredClasses();
+        model.addAttribute("classes", classes);
+
+        List<Instructor> instructors = database.getInstructors();
+        model.addAttribute("instructors", instructors);
+
+        List<Course> courses = database.getCourses();
+        model.addAttribute("courses", courses);
+
+        List<Student> students = database.getStudents();
+        model.addAttribute("students", students);
 
         return "extractingData";
     }

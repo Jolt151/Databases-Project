@@ -1,8 +1,6 @@
 package bc.databases.registrar;
 
-import bc.databases.registrar.objects.Department;
-import bc.databases.registrar.objects.Financial_Aid;
-import bc.databases.registrar.objects.Tuition_Payment;
+import bc.databases.registrar.objects.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -71,9 +69,6 @@ public class DatabaseImpl {
     }
 
     //METHODS FOR RETURNING ROWS FROM THE TABLE
-    public SqlRowSet getStudents(){
-        return jdbcTemplate.queryForRowSet("SELECT * FROM STUDENT");
-    }
 
     public List<Department> getDepartments(){
         return jdbcTemplate.query("SELECT * FROM DEPARTMENT", new RowMapper<Department>() {
@@ -114,4 +109,84 @@ public class DatabaseImpl {
             }
         });
     }
+
+    public List<Instructor> getInstructors(){
+        return jdbcTemplate.query("SELECT * FROM INSTRUCTORS", new RowMapper<Instructor>() {
+            @Override
+            public Instructor mapRow(ResultSet resultSet, int i) throws SQLException {
+                Instructor instructor = new Instructor();
+                instructor.setDepartment(resultSet.getString("DEPARTMENT"));
+                instructor.setGender(resultSet.getString("GENDER"));
+                instructor.setInstructor_name(resultSet.getString("INSTRUCTOR_NAME"));
+                instructor.setSalary(resultSet.getInt("SALARY"));
+                instructor.setTitle(resultSet.getString("TITLE"));
+                return  instructor;
+            }
+        });
+    }
+
+    public List<Registered_Classes> getRegisteredClasses(){
+        return jdbcTemplate.query("SELECT * FROM REGISTERED_CLASSES", new RowMapper<Registered_Classes>() {
+            @Override
+            public Registered_Classes mapRow(ResultSet resultSet, int i) throws SQLException {
+                Registered_Classes registeredClasses = new Registered_Classes();
+                registeredClasses.setEmplid(resultSet.getInt("EMPLID"));
+                registeredClasses.setGrade(resultSet.getString("GRADE"));
+                registeredClasses.setCredits(resultSet.getInt("CREDITS"));
+                registeredClasses.setDepartment(resultSet.getString("DEPARTMENT"));
+                registeredClasses.setClass_number(resultSet.getInt("CLASS_NUMBER"));
+                return registeredClasses;
+            }
+        });
+    }
+
+    public List<Course> getCourses(){
+        return jdbcTemplate.query("SELECT * FROM COURSE", new RowMapper<Course>() {
+            @Override
+            public Course mapRow(ResultSet resultSet, int i) throws SQLException {
+                Course course = new Course();
+                course.setClass_number(resultSet.getInt("CLASS_NUMBER"));
+                course.setDept(resultSet.getString("DEPT"));
+                course.setCourse_number(resultSet.getInt("COURSE_NUMBER"));
+                course.setClass_title(resultSet.getString("CLASS_TITLE"));
+                course.setInstructor_name(resultSet.getString("INSTRUCTOR_NAME"));
+                course.setBeginning_time(resultSet.getString("BEGINNING_TIME"));
+                course.setEnd_time(resultSet.getString("END_TIME"));
+                course.setRoom(resultSet.getString("ROOM"));
+                course.setNum_credits(resultSet.getInt("NUM_CREDITS"));
+                course.setSection(resultSet.getString("SECTION"));
+                course.setMode_inst(resultSet.getString("MODE_INST"));
+                course.setCapacity(resultSet.getInt("CAPACITY"));
+                course.setSemester(resultSet.getString("SEMESTER"));
+                course.setSi(resultSet.getString("SI"));
+                return course;
+            }
+        });
+    }
+
+    public List<Student> getStudents(){
+        return jdbcTemplate.query("SELECT * FROM STUDENT", new RowMapper<Student>() {
+            @Override
+            public Student mapRow(ResultSet resultSet, int i) throws SQLException {
+                Student student = new Student();
+                student.setEmplid(resultSet.getInt("EMPLID"));
+                student.setFirst_name(resultSet.getString("FIRST_NAME"));
+                student.setLast_name(resultSet.getString("LAST_NAME"));
+                student.setDob(resultSet.getDate("DOB"));
+                student.setCredits(resultSet.getInt("CREDITS"));
+                student.setGender(resultSet.getString("GENDER"));
+                student.setUnpaid_tuition(resultSet.getInt("UNPAID_TUITION"));
+                student.setEmail(resultSet.getString("EMAIL"));
+                student.setPhone(resultSet.getString("PHONE"));
+                student.setStarting_semester(resultSet.getString("STARTING_SEMESTER"));
+                student.setExpected_graduation(resultSet.getString("EXPECTED_GRADUATION"));
+                student.setAddress(resultSet.getString("ADDRESS"));
+                student.setMajor(resultSet.getString("MAJOR"));
+                return student;
+            }
+        });
+    }
+
+
+
 }
