@@ -12,7 +12,7 @@
             });
             xml.open("POST", address, true);
             xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xml.send(params2);
+            xml.send(a);
             xml.onreadystatechange = function (ev) {
                 alert(xml.responseText);
             }
@@ -118,7 +118,7 @@
         }
         else selectedGender=document.getElementById('StudentForm_Female').value;
 
-     let arr = [document.getElementById('StudentForm_emplid').value, document.getElementById('StudentForm_ln').value,
+     let arr = ['emplid=' + document.getElementById('StudentForm_emplid').value, document.getElementById('StudentForm_ln').value,
      document.getElementById('StudentForm_fn').value, document.getElementById('StudentForm_ln').value,
      document.getElementById('StudentForm_dob').value, document.getElementById('StudentForm_credits').value, selectedGender,
      document.getElementById('StudentForm_ut').value, document.getElementById('StudentForm_email').value,
