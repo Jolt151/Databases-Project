@@ -110,13 +110,19 @@
         }
         else selectedGender=document.getElementById('StudentForm_Female').value;
 
-     let arr = ['emplid=' + document.getElementById('StudentForm_emplid').value, document.getElementById('StudentForm_ln').value,
-     document.getElementById('StudentForm_fn').value, document.getElementById('StudentForm_ln').value,
-     document.getElementById('StudentForm_dob').value, document.getElementById('StudentForm_credits').value, selectedGender,
-     document.getElementById('StudentForm_ut').value, document.getElementById('StudentForm_email').value,
-     document.getElementById('StudentForm_phone').value, document.getElementById('StudentForm_ss').value,
-     document.getElementById('StudentForm_eg').value, document.getElementById('StudentForm_address').value,
-     document.getElementById('StudentForm_major').value];
+     let arr = ['emplid=' + document.getElementById('StudentForm_emplid').value,
+     'last_name=' + document.getElementById('StudentForm_ln').value,
+     'first_name=' + document.getElementById('StudentForm_fn').value,
+     'dob=' + document.getElementById('StudentForm_dob').value,
+     'credits=' + document.getElementById('StudentForm_credits').value,
+     'gender=' + selectedGender,
+     'unpaid_tuition=' + document.getElementById('StudentForm_ut').value,
+     'email=' + document.getElementById('StudentForm_email').value,
+     'phone=' + document.getElementById('StudentForm_phone').value,
+     'starting_semester=' + document.getElementById('StudentForm_ss').value,
+     'expected_graduation=' + document.getElementById('StudentForm_eg').value,
+     'address=' + document.getElementById('StudentForm_address').value,
+     'major=' + document.getElementById('StudentForm_major').value];
      send('/rest/addStudent',arr);">
 </form>
 
@@ -151,13 +157,20 @@
     Special Information:
     <input type="data" id="CourseForm_si"><br>
     <input type="button" value="Submit" onclick="
-        let arr=[document.getElementById('CourseForm_classNumber').value, document.getElementById('CourseForm_dept').value,
-        document.getElementById('CourseForm_courseNum').value, document.getElementById('CourseForm_classTitle').value,
-        document.getElementById('CourseForm_instructorName').value, document.getElementById('CourseForm_beginningTime').value,
-        document.getElementById('CourseForm_room').value, document.getElementById('CourseForm_numCredts').value,
-        document.getElementById('CourseForm_section').value, document.getElementById('CourseForm_modeInst').value,
-        document.getElementById('CourseForm_capacity').value, document.getElementById('CourseForm_semester'),
-        document.getElementById('CourseForm_si').value];
+        let arr=['class_number=' + document.getElementById('CourseForm_classNumber').value,
+        'dept='+ document.getElementById('CourseForm_dept').value,
+        'course_number=' + document.getElementById('CourseForm_courseNum').value,
+        'class_title=' + document.getElementById('CourseForm_classTitle').value,
+        'instructor_name=' + document.getElementById('CourseForm_instructorName').value,
+        'beginning_time=' + document.getElementById('CourseForm_beginningTime').value,
+        'end_time=' + document.getElementById('CourseForm_endTime').value,
+        'room=' + document.getElementById('CourseForm_room').value,
+        'num_credits=' + document.getElementById('CourseForm_numCredits').value,
+        'section=' + document.getElementById('CourseForm_section').value,
+        'mode_inst='+ document.getElementById('CourseForm_modeInst').value,
+        'capacity=' + document.getElementById('CourseForm_capacity').value,
+        'semester=' + document.getElementById('CourseForm_semester').value,
+        'si=' + document.getElementById('CourseForm_si').value];
         send('/rest/addCourse', arr);">
 </form>
 
@@ -175,9 +188,11 @@
     Class Number:
     <input type="4" id="RegisteredClasses_classNum" minlength="4" maxlength="4"><br>
     <input type="button" value="Submit" onclick="
-    let arr=[document.getElementById('RegisteredClasses_emplid').value, document.getElementById('RegisteredClasses_grade').value,
-    document.getElementById('RegisteredClasses_credits').value, document.getElementById('RegisteredClasses_dept').value,
-    document.getElementById('RegisteredClasses_classNum').value];
+    let arr=['emplid=' + document.getElementById('RegisteredClasses_emplid').value,
+    'grade=' + document.getElementById('RegisteredClasses_grade').value,
+    'credits=' + document.getElementById('RegisteredClasses_credits').value,
+    'department=' + document.getElementById('RegisteredClasses_dept').value,
+    'class_number=' + document.getElementById('RegisteredClasses_classNum').value];
     send('/rest/addRegisteredClass', arr);"><br>
 </form>
 
@@ -206,8 +221,11 @@
         }
         else selectedGender=document.getElementById('instructor_female').value;
 
-        let arr=[document.getElementById('instructor_title').value, document.getElementById('instructor_name').value,
-        selectedGender, document.getElementById('instructor_dept').value, document.getElementById('instructor_salary').value];
+        let arr=['title=' + document.getElementById('instructor_title').value,
+        'instructor_name=' + document.getElementById('instructor_name').value,
+        'gender=' + selectedGender,
+        'department=' + document.getElementById('instructor_dept').value,
+        'salary=' + document.getElementById('instructor_salary').value];
         send('/rest/addInstructor',arr);">
     <br>
 </form>
@@ -222,7 +240,9 @@
     Budget:
     <input id="department_budget" type="number" min="0"><br>
     <input type="button" value="Submit" onclick="
-            let arr = [document.getElementById('department_department').value, document.getElementById('department_chair').value, document.getElementById('department_budget').value];
+            let arr = ['department=' + document.getElementById('department_department').value,
+            'department_chair=' + document.getElementById('department_chair').value,
+            'budget=' + document.getElementById('department_budget').value];
             send('/rest/addDepartment', arr);">
 </form>
 
@@ -238,8 +258,9 @@
     <input type="button" value="Submit" onclick="
     checkTPForm();
     if(checkTPForm()===true){
-    let arr=[document.getElementById('TuitionPayments_emplid').value, document.getElementById('TuitionPayment_amountPaid').value,
-    document.getElementById('TuitionPayment_datePaid').value];
+    let arr=['emplid=' + document.getElementById('TuitionPayments_emplid').value,
+    'amount_paid=' + document.getElementById('TuitionPayment_amountPaid').value,
+    'date_paid=' + document.getElementById('TuitionPayment_datePaid').value];
     send('/rest/addTuitionPayment', arr);
     }">
 </form>
@@ -293,8 +314,10 @@
     <input type="button" value="Submit" onclick="
     checkFinAidForm();
     if(checkFinAidForm()===true){
-    let arr=[document.getElementById('FinancialAid_emplid').value, document.getElementById(
-        'FinancialAid_grantMoney').value, document.getElementById('FinancialAid_grantName').value, document.getElementById('FinancialAid_dateApplied').value];
+    let arr=['empid=' + document.getElementById('FinancialAid_emplid').value,
+    'grant_money=' + document.getElementById('FinancialAid_grantMoney').value,
+    'grant_name=' + document.getElementById('FinancialAid_grantName').value,
+    'date_applied=' + document.getElementById('FinancialAid_dateApplied').value];
     send('/rest/addFinancialAid',arr);
     }"><br>
 </form>
