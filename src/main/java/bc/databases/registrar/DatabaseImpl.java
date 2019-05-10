@@ -64,7 +64,7 @@ public class DatabaseImpl {
     }
 
     public int addFinancialAid(int emplid, int grant_money, String grant_name, Date date_applied){
-        return jdbcTemplate.update("INSERT INTO FINANICAL_AID(EMPLID, GRANT_MONEY, GRANT_NAME, DATE_APPLIED) VALUES " +
+        return jdbcTemplate.update("INSERT INTO FINANCIAL_AID(EMPLID, GRANT_MONEY, GRANT_NAME, DATE_APPLIED) VALUES " +
                 "(?, ?, ?, ?)", emplid, grant_money, grant_name, date_applied);
     }
 
@@ -84,7 +84,7 @@ public class DatabaseImpl {
     }
 
     public List<Financial_Aid> getFinancialAid(){
-        return jdbcTemplate.query("SELECT * FROM FINANICAL_AID", new RowMapper<Financial_Aid>() {
+        return jdbcTemplate.query("SELECT * FROM FINANCIAL_AID", new RowMapper<Financial_Aid>() {
             @Override
             public Financial_Aid mapRow(ResultSet resultSet, int i) throws SQLException {
                 Financial_Aid financial_aid = new Financial_Aid();
