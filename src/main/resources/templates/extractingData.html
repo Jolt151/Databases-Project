@@ -4,13 +4,60 @@
     <meta charset="UTF-8">
     <title>Extracting Data</title>
 </head>
+<style> body {
+    font-family: Arial;
+}
+
+.tab {
+
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+</style>
 <body>
 
------Students----
+<div class="tab">
+    <Button class="InsertingData" onclick="location.href='home.html'"> Data Insertion</Button>
+    <Button class="ExtractingData" onclick="location.href='extractingData.html'">Data Extraction</Button>
+</div>
+<body>
+<br>
+-----STUDENTS----
 <table>
     <thead>
     <tr>
-        <th>Emplid</th>
+        <th>EMPLID</th>
         <th>Last Name</th>
         <th>First Name</th>
         <th>DOB</th>
@@ -43,13 +90,13 @@
     </tr>
     </tbody>
 </table>
-
+<br>
 ------DEPARTMENT------
 
 <table>
     <thead>
     <tr>
-        <th>Deparment</th>
+        <th>Department</th>
         <th>Chair</th>
         <th>Budget</th>
     </tr>
@@ -62,7 +109,7 @@
     </tr>
     </tbody>
 </table>
-
+<br>
 -----COURSES-----
 <table>
     <thead>
@@ -102,12 +149,12 @@
     </tr>
     </tbody>
 </table>
-
+<br>
 -----REGISTERED CLASSES------
 <table>
     <thead>
     <tr>
-        <th>Emplid</th>
+        <th>EMPLID</th>
         <th>Grade</th>
         <th>Credits</th>
         <th>Department</th>
@@ -124,7 +171,7 @@
     </tr>
     </tbody>
 </table>
-
+<br>
 ------INSTRUCTORS--------
 <table>
     <thead>
@@ -146,12 +193,12 @@
     </tr>
     </tbody>
 </table>
-
+<br>
 ----TUITION_PAYMENTS-----
 <table>
     <thead>
     <tr>
-        <th>Emplid</th>
+        <th>EMPLID</th>
         <th>Amount Paid</th>
         <th>Date Paid</th>
     </tr>
@@ -164,13 +211,12 @@
     </tr>
     </tbody>
 </table>
-
-
+<br>
 ------FINANCIAL AID--------
 <table>
     <thead>
     <tr>
-        <th>Emplid</th>
+        <th>EMPLID</th>
         <th>Grant Money</th>
         <th>Grant Name</th>
         <th>Date Applied</th>

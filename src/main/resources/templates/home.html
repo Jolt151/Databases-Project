@@ -80,7 +80,7 @@
     DOB:
     <input type="date" id="StudentForm_dob"><br>
     Credits:
-    <input type="number" id="StudentForm_credits" min="0" max="120"><br>
+    <input type="number" id="StudentForm_credits" min="0" max="200"><br>
     <div>
         Gender:
         <input type="radio" id="StudentForm_Male" name="gender" value="Male">
@@ -109,7 +109,7 @@
             selectedGender=document.getElementById('StudentForm_Male').value;
         }
         else selectedGender=document.getElementById('StudentForm_Female').value;
-
+    if(checkStudentForm()===true){
      let arr = ['emplid=' + document.getElementById('StudentForm_emplid').value,
      'last_name=' + document.getElementById('StudentForm_ln').value,
      'first_name=' + document.getElementById('StudentForm_fn').value,
@@ -123,8 +123,85 @@
      'expected_graduation=' + document.getElementById('StudentForm_eg').value,
      'address=' + document.getElementById('StudentForm_address').value,
      'major=' + document.getElementById('StudentForm_major').value];
-     send('/rest/addStudent',arr);">
+     send('/rest/addStudent',arr);}">
 </form>
+
+<script>
+    function checkStudentForm(){
+        var emplid= document.getElementById('StudentForm_emplid').value;
+        var dob=document.getElementById('StudentForm_dob').value;
+        var credits=document.getElementById('StudentForm_credits').value;
+        var ut= document.getElementById('StudentForm_ut').value;
+        var ss=document.getElementById('StudentForm_ss').value;
+        var eg=document.getElementById('StudentForm_eg').value;
+
+        let temp=true;
+
+        if (emplid.toString().length === 0) {
+            alert("Enter an EMPLID");
+            temp=false;
+        } else if (emplid.toString().length != 8) {
+            alert("Invalid EMPLID");
+            temp=false;
+        }
+
+        var today = new Date();
+        var year = dob.toString().substring(0, 4);
+        var month = dob.toString().substring(5, 7);
+        var day = dob.toString().substring(8, 10);
+        if (year > today.getFullYear()) {
+            alert("Date can not be in the future");
+            temp=false;
+        } else if (month > today.getMonth() && year==today.getFullYear()) {
+            alert("Date can not be in the future");
+            temp=false;
+        } else if (month < today.getMonth() && day > today.getDay() && year==today.getFullYear()) {
+            alert("Date can not be in the future");
+            temp=false;
+        }
+
+        if(credits>200 || credits <0){
+            alert("Credits must be between 200 and 0");
+            temp=false;
+        }
+        if(ut<0) {
+            alert("Unpaid Tuition can not be less than 0");
+            temp = false;
+        }
+        if(ss.toString().length===9){
+            var tempString=ss.toString().substr(0,3);
+            for(let i =0; i<3; i++){
+                if(tempString.charAt(i)!=ss.toString().charAt(i)){
+                    alert("Starting Semester must be Fall or Spring followed by space then the year");
+                    temp=false;
+                }
+            }
+        }
+        else {
+            var temps1=ss.toString().substr(0,5);
+            for(let i=0; i<5; i++){
+                if(temps1.charAt(i)!=ss.toString().charAt(i)){}
+                alert("Starting Semester must be Fall or Spring followed by space then the year");
+                temp=false;
+            }
+        }
+
+        var year1 = eg.toString().substring(0, 4);
+        var month1 = eg.toString().substring(5, 7);
+        var day1 = eg.toString().substring(8, 10);
+        if (year1 > today.getFullYear()) {
+            alert("Date can not be in the future");
+            temp=false;
+        } else if (month1 > today.getMonth() && year==today.getFullYear()) {
+            alert("Date can not be in the future");
+            temp=false;
+        } else if (month1 < today.getMonth() && day1 > today.getDay() && year1==today.getFullYear()) {
+            alert("Date can not be in the future");
+            temp=false;
+        }
+        return temp;
+    }
+</script>
 
 <br>
 <b>Course Form:</b>
@@ -157,6 +234,7 @@
     Special Information:
     <input type="data" id="CourseForm_si"><br>
     <input type="button" value="Submit" onclick="
+        if(checkCourseForm()===true){
         let arr=['class_number=' + document.getElementById('CourseForm_classNumber').value,
         'dept='+ document.getElementById('CourseForm_dept').value,
         'course_number=' + document.getElementById('CourseForm_courseNum').value,
@@ -171,8 +249,32 @@
         'capacity=' + document.getElementById('CourseForm_capacity').value,
         'semester=' + document.getElementById('CourseForm_semester').value,
         'si=' + document.getElementById('CourseForm_si').value];
-        send('/rest/addCourse', arr);">
+        send('/rest/addCourse', arr);}">
 </form>
+
+<script>
+    function checkCourseForm(){
+        var classNum= document.getElementById('CourseForm_classNumber').value;
+        var courseNum=document.getElementById('CourseForm_courseNum').value;
+        var credits= document.getElementById('CourseForm_numCredits').value;
+
+        let temp=true;
+
+        if(classNum.toString().length!=5){
+            alert("Class number must be 5 digits");
+            temp=false;
+        }
+        if(courseNum.toString().length!=4){
+            alert("Course number must be 4 digits");
+            temp=false;
+        }
+        if(credits>5 || credits<1){
+            alert("Credits must be between 1 and 5");
+            temp=false;
+        }
+        return temp;
+    }
+</script>
 
 <br>
 <b>Registered Classes:</b>
@@ -180,21 +282,60 @@
     EMPLID:
     <input type="number" id="RegisteredClasses_emplid" maxlength="8" min="11111111" max="99999999"><br>
     Grade:
-    <input type="data" id="RegisteredClasses_grade" maxlength="1"><br>
+    <input type="data" id="RegisteredClasses_grade" maxlength="2"><br>
     Credits:
     <input type="number" id="RegisteredClasses_credits" maxlength="1" min="3" max="5"><br>
     Department:
     <input type="data" id="RegisteredClasses_dept" maxlength="4" minlength="4"><br>
     Class Number:
-    <input type="4" id="RegisteredClasses_classNum" minlength="4" maxlength="4"><br>
+    <input type="4" id="RegisteredClasses_classNum" minlength="5" maxlength="5"><br>
     <input type="button" value="Submit" onclick="
+    if(checkRCForm()===true){
     let arr=['emplid=' + document.getElementById('RegisteredClasses_emplid').value,
     'grade=' + document.getElementById('RegisteredClasses_grade').value,
     'credits=' + document.getElementById('RegisteredClasses_credits').value,
     'department=' + document.getElementById('RegisteredClasses_dept').value,
     'class_number=' + document.getElementById('RegisteredClasses_classNum').value];
-    send('/rest/addRegisteredClass', arr);"><br>
+    send('/rest/addRegisteredClass', arr);}"><br>
 </form>
+
+<script>
+    function checkRCForm(){
+        let emplid= document.getElementById('RegisteredClasses_emplid').value;
+        let grade= document.getElementById('RegisteredClasses_grade').value;
+        let credits= document.getElementById('RegisteredClasses_credits').value;
+        let dept=document.getElementById('RegisteredClasses_dept').value;
+        let classNum=document.getElementById('RegisteredClasses_classNum').value;
+
+        let temp=true;
+
+        if (emplid.toString().length === 0) {
+            alert("Enter an EMPLID");
+            temp=false;
+        } else if (emplid.toString().length != 8) {
+            alert("Invalid EMPLID");
+            temp=false;
+        }
+        let letter= grade.toString().charAt(0);
+        if(letter!='A' || letter!='B' || letter!='C' || letter!='D' || letter!='F'){
+            alert("Invalid Grade");
+            temp=false;
+        }
+        if(credits >1 || credits <5){
+            alert("Invalid Credits");
+            temp=false;
+        }
+        if(dept.toString().length!=4){
+            alert('Department name must be four letters');
+            temp=false;
+        }
+        if(classNum.toString().length!=5){
+            alert('Class number must be 5 digits');
+            temp=false;
+        }
+        return temp;
+    }
+</script>
 
 <br>
 <b>Instructor:</b>
@@ -221,30 +362,88 @@
         }
         else selectedGender=document.getElementById('instructor_female').value;
 
+        if(checkInstForm()===true){
         let arr=['title=' + document.getElementById('instructor_title').value,
         'instructor_name=' + document.getElementById('instructor_name').value,
         'gender=' + selectedGender,
         'department=' + document.getElementById('instructor_dept').value,
         'salary=' + document.getElementById('instructor_salary').value];
-        send('/rest/addInstructor',arr);">
+        send('/rest/addInstructor',arr);
+        }">
     <br>
 </form>
+
+<script>
+    function checkInstForm(){
+        let title= document.getElementById('instructor_title').value;
+        let name= document.getElementById('instructor_name').value;
+        let dept=document.getElementById('instructor_dept').value;
+        let salary= document.getElementById('instructor_salary').value;
+
+        var temp=true;
+
+        if(title.toString().length>25){
+            alert("Title is too long");
+            temp=false;
+        }
+        if(name.toString().length>50){
+            alert("Name is too long");
+            temp=false;
+        }
+        if(dept.toString().length>4){
+            alert("Department name is not the right size");
+            temp=false;
+        }
+        if(salary.toString().length<5 || salary.toString().length>7){
+            alert("Salary are not between 1,000 and 9,999,999");
+            temp=false;
+        }
+        return temp;
+    }
+</script>
 
 <br>
 <b>Department:</b>
 <form name="department" method="post">
     Department:
-    <input id="department_department" type="data" maxlength="4"><br>
+    <input id="department_department" type="data" maxlength="4" minlength="4"><br>
     Department Chair:
     <input id="department_chair" type="data" maxlength="50"><br>
     Budget:
     <input id="department_budget" type="number" min="0"><br>
     <input type="button" value="Submit" onclick="
+    if(checkDeptForm()===true){
             let arr = ['department=' + document.getElementById('department_department').value,
             'department_chair=' + document.getElementById('department_chair').value,
             'budget=' + document.getElementById('department_budget').value];
-            send('/rest/addDepartment', arr);">
+            send('/rest/addDepartment', arr);
+    }">
 </form>
+
+<script>
+    function checkDeptForm(){
+        let dept= document.getElementById('department_department').value;
+        let chair= document.getElementById('department_chair').value;
+        let budget= document.getElementById('department_budget').value;
+
+        let temp=true;
+
+        if(dept.toString().length!=4){
+            alert("Invalid Department Name");
+            temp=false;
+        }
+        if(chair.toString().length>50){
+            alert("Name exceeds allowed characters");
+            temp=false;
+        }
+        if(budget<0){
+            alert("Money can not be negative");
+            temp=false;
+        }
+        return temp;
+    }
+
+</script>
 
 <br>
 <b>Tuition Payments:</b>
@@ -271,16 +470,18 @@
         var grantMoney= document.getElementById('TuitionPayment_amountPaid').value;
         var dateApplied = document.getElementById('TuitionPayment_datePaid').value;
 
+        let temp=true;
+
         if (emplid.toString().length === 0) {
             alert("Enter an EMPLID");
-            return false;
+            temp=false;
         } else if (emplid.toString().length != 8) {
             alert("Invalid EMPLID");
-            return false;
+            temp=false;
         }
         if (grantMoney < 0) {
             alert("Money can not be negative");
-            return false;
+            temp=false;
         }
         var today = new Date();
         var year = dateApplied.toString().substring(0, 4);
@@ -288,15 +489,15 @@
         var day = dateApplied.toString().substring(8, 10);
         if (year > today.getFullYear()) {
             alert("Date can not be in the future");
-            return false;
+            temp= false;
         } else if (month > today.getMonth()) {
             alert("Date can not be in the future");
-            return false;
+            temp= false;
         } else if (month < today.getMonth() && day > today.getDay()) {
             alert("Date can not be in the future");
-            return false;
+            temp= false;
         }
-        return true;
+        return temp;
     }
 </script>
 
@@ -328,17 +529,19 @@
         var grantMoney = document.getElementById('FinancialAid_grantMoney').value;
         var dateApplied = document.getElementById('FinancialAid_dateApplied').value;
 
+        let temp=true;
+
         if(emplid.toString().length===0) {
             alert("Enter an EMPLID");
-            return false;
+            temp=false;
         }
         else if (emplid.toString().length != 8){
             alert("Invalid EMPLID");
-            return false;
+            temp=false;
         }
         if (grantMoney < 0) {
             alert("Money can not be negative");
-            return false;
+            temp=false;
         }
         var today = new Date();
         var year = dateApplied.toString().substring(0, 4);
@@ -346,15 +549,15 @@
         var day = dateApplied.toString().substring(8, 10);
         if (year > today.getFullYear()) {
             alert("Date can not be in the future");
-            return false;
+            temp=false;
         } else if (month > today.getMonth() && year==today.getFullYear()) {
             alert("Date can not be in the future");
-            return false;
+            temp=false;
         } else if (month < today.getMonth() && day > today.getDay() && year==today.getFullYear()) {
             alert("Date can not be in the future");
-            return false;
+            temp=false;
         }
-        return true;
+        return temp;
     }
 </script>
 
