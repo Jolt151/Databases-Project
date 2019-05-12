@@ -130,133 +130,128 @@ Created by Michael Levi & Jian Hui Mai
 </form>
 
 <script>
-    function checkStudentForm(){
-        var emplid= document.getElementById('StudentForm_emplid').value;
-        var ln=document.getElementById('StudentForm_ln').value;
-        var fn=document.getElementById('StudentForm_fn').value;
-        var dob=document.getElementById('StudentForm_dob').value;
-        var credits=document.getElementById('StudentForm_credits').value;
-        var ut= document.getElementById('StudentForm_ut').value;
-        var ss=document.getElementById('StudentForm_ss').value;
-        var eg=document.getElementById('StudentForm_eg').value;
-        var email=document.getElementById('StudentForm_email').value;
-        var phone=document.getElementById('StudentForm_phone').value;
-        var address=document.getElementById('StudentForm_address').value;
-        var major=document.getElementById('StudentForm_major').value;
+    function checkStudentForm() {
+        var emplid = document.getElementById('StudentForm_emplid').value;
+        var ln = document.getElementById('StudentForm_ln').value;
+        var fn = document.getElementById('StudentForm_fn').value;
+        var dob = document.getElementById('StudentForm_dob').value;
+        var credits = document.getElementById('StudentForm_credits').value;
+        var ut = document.getElementById('StudentForm_ut').value;
+        var ss = document.getElementById('StudentForm_ss').value;
+        var eg = document.getElementById('StudentForm_eg').value;
+        var email = document.getElementById('StudentForm_email').value;
+        var phone = document.getElementById('StudentForm_phone').value;
+        var address = document.getElementById('StudentForm_address').value;
+        var major = document.getElementById('StudentForm_major').value;
 
-        let temp=true;
+        let temp = true;
 
-        if(email.toString().length===0){
+        if (email.toString().length === 0) {
             alert("Please enter an email");
-            temp=false;
+            temp = false;
         }
 
-        if(phone.toString().length===0){
+        if (phone.toString().length === 0) {
             alert("Please enter a phone number");
-            temp=false;
-        }
-        else if(phone.toString().length!=10){
+            temp = false;
+        } else if (phone.toString().length != 10) {
             alert("Number is invalid format must be 0123456789");
-            temp=false;
+            temp = false;
         }
 
-        if(address.toString().length===0){
+        if (address.toString().length === 0) {
             alert("Please enter an address");
-            temp=false;
+            temp = false;
         }
 
-        if(major.toString().length===0){
+        if (major.toString().length === 0) {
             alert("Please enter a major");
-            temp=false;
+            temp = false;
         }
 
         if (emplid.toString().length === 0) {
             alert("Enter an EMPLID");
-            temp=false;
+            temp = false;
         } else if (emplid.toString().length != 8) {
             alert("Invalid EMPLID");
-            temp=false;
+            temp = false;
         }
 
-        if(ln.toString().length===0){
+        if (ln.toString().length === 0) {
             alert("Last Name can not be empty");
-            temp=false;
+            temp = false;
         }
 
-        if(fn.toString().length===0){
+        if (fn.toString().length === 0) {
             alert("First Name can not be empty");
-            temp=false;
+            temp = false;
         }
 
         var today = new Date();
         var year = dob.toString().substring(0, 4);
         var month = dob.toString().substring(5, 7);
         var day = dob.toString().substring(8, 10);
-        if(dob.toString().length===0){
+        if (dob.toString().length === 0) {
             alert("Date of birth can not be empty");
-            temp=false;
-        }
-        else if (year > today.getFullYear()) {
+            temp = false;
+        } else if (year > today.getFullYear()) {
             alert("Date can not be in the future");
-            temp=false;
-        } else if (month > today.getMonth() && year==today.getFullYear()) {
+            temp = false;
+        } else if (month > today.getMonth() && year == today.getFullYear()) {
             alert("Date can not be in the future");
-            temp=false;
-        } else if (month < today.getMonth() && day > today.getDay() && year==today.getFullYear()) {
+            temp = false;
+        } else if (month < today.getMonth() && day > today.getDay() && year == today.getFullYear()) {
             alert("Date can not be in the future");
-            temp=false;
-        }
-
-        if(credits>200 || credits <0){
-            alert("Credits must be between 200 and 0");
-            temp=false;
-        }
-        if(ut<0) {
-            alert("Unpaid Tuition can not be less than 0");
             temp = false;
         }
-        else if(ut.toString().length===0){
+
+        if (credits > 200 || credits < 0) {
+            alert("Credits must be between 200 and 0");
+            temp = false;
+        }
+        if (ut < 0) {
+            alert("Unpaid Tuition can not be less than 0");
+            temp = false;
+        } else if (ut.toString().length === 0) {
             alert("Tuition can not be empty");
-            temp=false;
+            temp = false;
         }
-        if(ss.toString().length===0){
+        if (ss.toString().length === 0) {
             alert("Must enter a starting semester");
-            temp=false;
-        }
-        else if(ss.toString().length===9){
-            var tempString=ss.toString().substr(0,3);
-            for(let i =0; i<3; i++){
-                if(tempString.charAt(i)!=ss.toString().charAt(i)){
+            temp = false;
+        } else if (ss.toString().length === 9) {
+            var tempString = ss.toString().substr(0, 3);
+            for (let i = 0; i < 3; i++) {
+                if (tempString.charAt(i) != ss.toString().charAt(i)) {
                     alert("Starting Semester must be Fall or Spring followed by space then the year");
-                    temp=false;
+                    temp = false;
                 }
             }
-        }
-        else {
-            var temps1=ss.toString().substr(0,5);
-            for(let i=0; i<5; i++){
-                if(temps1.charAt(i)!=ss.toString().charAt(i)){}
+        } else {
+            var temps1 = ss.toString().substr(0, 5);
+            for (let i = 0; i < 5; i++) {
+                if (temps1.charAt(i) != ss.toString().charAt(i)) {
+                }
                 alert("Starting Semester must be Fall or Spring followed by space then the year");
-                temp=false;
+                temp = false;
             }
         }
 
         var year1 = eg.toString().substring(0, 4);
         var month1 = eg.toString().substring(5, 7);
         var day1 = eg.toString().substring(8, 10);
-        if(eg.toString().length===0) {
+        if (eg.toString().length === 0) {
             alert("Must enter the expect graduation date");
-            temp=false;
-        }
-        else if (year1 > today.getFullYear()) {
+            temp = false;
+        } else if (year1 > today.getFullYear()) {
             alert("Date can not be in the future");
-            temp=false;
-        } else if (month1 > today.getMonth() && year==today.getFullYear()) {
+            temp = false;
+        } else if (month1 > today.getMonth() && year == today.getFullYear()) {
             alert("Date can not be in the future");
-            temp=false;
-        } else if (month1 < today.getMonth() && day1 > today.getDay() && year1==today.getFullYear()) {
+            temp = false;
+        } else if (month1 < today.getMonth() && day1 > today.getDay() && year1 == today.getFullYear()) {
             alert("Date can not be in the future");
-            temp=false;
+            temp = false;
         }
         return temp;
     }
@@ -312,78 +307,77 @@ Created by Michael Levi & Jian Hui Mai
 </form>
 
 <script>
-    function checkCourseForm(){
-        var classNum= document.getElementById('CourseForm_classNumber').value;
-        var courseNum=document.getElementById('CourseForm_courseNum').value;
-        var credits= document.getElementById('CourseForm_numCredits').value;
+    function checkCourseForm() {
+        var classNum = document.getElementById('CourseForm_classNumber').value;
+        var courseNum = document.getElementById('CourseForm_courseNum').value;
+        var credits = document.getElementById('CourseForm_numCredits').value;
         var dept = document.getElementById('CourseForm_dept').value;
-        var ct=document.getElementById('CourseForm_classTitle').value;
-        var in1=document.getElementById('CourseForm_instructorName').value;
-        var bt=document.getElementById('CourseForm_beginningTime').value;
-        var et=document.getElementById('CourseForm_endTime').value;
-        var room=document.getElementById('CourseForm_room').value;
-        var section=document.getElementById('CourseForm_section').value;
-        var modInst=document.getElementById('CourseForm_modeInst').value;
-        var capacity=document.getElementById('CourseForm_capacity').value;
-        var semester=document.getElementById('CourseForm_semester').value;
+        var ct = document.getElementById('CourseForm_classTitle').value;
+        var in1 = document.getElementById('CourseForm_instructorName').value;
+        var bt = document.getElementById('CourseForm_beginningTime').value;
+        var et = document.getElementById('CourseForm_endTime').value;
+        var room = document.getElementById('CourseForm_room').value;
+        var section = document.getElementById('CourseForm_section').value;
+        var modInst = document.getElementById('CourseForm_modeInst').value;
+        var capacity = document.getElementById('CourseForm_capacity').value;
+        var semester = document.getElementById('CourseForm_semester').value;
 
-        let temp=true;
+        let temp = true;
 
-        if(dept.toString().length===0){
+        if (dept.toString().length === 0) {
             alert("Department Name  can not be empty");
-            temp=false;
+            temp = false;
         }
-        if(semester.toString().length===0){
+        if (semester.toString().length === 0) {
             alert("Semester can not be empty");
-            temp=false;
+            temp = false;
         }
-        if(ct.toString().length===0){
+        if (ct.toString().length === 0) {
             alert("Class title can not be empty");
-            temp=false;
+            temp = false;
         }
-        if(in1.toString().length===0){
+        if (in1.toString().length === 0) {
             alert("Instructor Name can not be empty");
-            temp=false;
+            temp = false;
         }
-        if(capacity.toString().length===0){
+        if (capacity.toString().length === 0) {
             alert("Class capacity can not be empty");
-            temp=false;
+            temp = false;
         }
-        if(bt.toString().length===0){
+        if (bt.toString().length === 0) {
             alert("Beginning Time can not be empty");
-            temp=false;
+            temp = false;
         }
-        if(et.toString().length===0){
+        if (et.toString().length === 0) {
             alert("Ending Time can not be empty");
-            temp=false;
+            temp = false;
         }
-        if(room.toString().length===0){
+        if (room.toString().length === 0) {
             alert("Room can not be empty");
-            temp=false;
+            temp = false;
         }
-        if(section.toString().length===0){
+        if (section.toString().length === 0) {
             alert("Section can not be empty");
-            temp=false;
+            temp = false;
         }
-        if(classNum.toString().length!=5){
+        if (classNum.toString().length != 5) {
             alert("Class number must be 5 digits and not empty");
-            temp=false;
+            temp = false;
         }
-        if(modInst.toString().length===0){
+        if (modInst.toString().length === 0) {
             alert("Mode of instruction can not be empty");
-            temp=false;
+            temp = false;
         }
-        if(courseNum.toString().length!=4){
+        if (courseNum.toString().length != 4) {
             alert("Course number must be 4 digits and not empty");
-            temp=false;
+            temp = false;
         }
-        if(credits.toString().length===0){
+        if (credits.toString().length === 0) {
             alert("Please enter number of credits");
-            temp=false;
-        }
-        else if(credits>5 || credits<1){
+            temp = false;
+        } else if (credits > 5 || credits < 1) {
             alert("Credits must be between 1 and 5");
-            temp=false;
+            temp = false;
         }
         return temp;
     }
@@ -413,46 +407,44 @@ Created by Michael Levi & Jian Hui Mai
 </form>
 
 <script>
-    function checkRCForm(){
-        let emplid= document.getElementById('RegisteredClasses_emplid').value;
-        let grade= document.getElementById('RegisteredClasses_grade').value;
-        let credits= document.getElementById('RegisteredClasses_credits').value;
-        let dept=document.getElementById('RegisteredClasses_dept').value;
-        let classNum=document.getElementById('RegisteredClasses_classNum').value;
+    function checkRCForm() {
+        let emplid = document.getElementById('RegisteredClasses_emplid').value;
+        let grade = document.getElementById('RegisteredClasses_grade').value;
+        let credits = document.getElementById('RegisteredClasses_credits').value;
+        let dept = document.getElementById('RegisteredClasses_dept').value;
+        let classNum = document.getElementById('RegisteredClasses_classNum').value;
 
-        let temp=true;
+        let temp = true;
 
         if (emplid.toString().length === 0) {
             alert("Enter an EMPLID");
-            temp=false;
+            temp = false;
         } else if (emplid.toString().length != 8) {
             alert("Invalid EMPLID");
-            temp=false;
+            temp = false;
         }
-        let letter= grade.toString().charAt(0);
-        if(grade.toString().length===0){
+        let letter = grade.toString().charAt(0);
+        if (grade.toString().length === 0) {
             alert("Please enter a grade");
-            temp=false;
-        }
-        else if(letter!='A' || letter!='B' || letter!='C' || letter!='D' || letter!='F'){
+            temp = false;
+        } else if (letter != 'A' || letter != 'B' || letter != 'C' || letter != 'D' || letter != 'F') {
             alert("Invalid Grade");
-            temp=false;
+            temp = false;
         }
-        if(credits.toString().length===0){
+        if (credits.toString().length === 0) {
             alert("Please enter number of credits");
-            temp=false;
-        }
-        else if(credits >1 || credits <5){
+            temp = false;
+        } else if (credits > 1 || credits < 5) {
             alert("Invalid Credits");
-            temp=false;
+            temp = false;
         }
-        if(dept.toString().length!=4){
+        if (dept.toString().length != 4) {
             alert('Department name must be four letters and not empty');
-            temp=false;
+            temp = false;
         }
-        if(classNum.toString().length!=5){
+        if (classNum.toString().length != 5) {
             alert('Class number must be 5 digits and not empty');
-            temp=false;
+            temp = false;
         }
         return temp;
     }
@@ -501,33 +493,32 @@ Created by Michael Levi & Jian Hui Mai
 </form>
 
 <script>
-    function checkInstForm(){
-        let title= document.getElementById('instructor_title').value;
-        let name= document.getElementById('instructor_name').value;
-        let dept=document.getElementById('instructor_dept').value;
-        let salary= document.getElementById('instructor_salary').value;
+    function checkInstForm() {
+        let title = document.getElementById('instructor_title').value;
+        let name = document.getElementById('instructor_name').value;
+        let dept = document.getElementById('instructor_dept').value;
+        let salary = document.getElementById('instructor_salary').value;
 
-        var temp=true;
+        var temp = true;
 
-        if(title.toString().length===0){
+        if (title.toString().length === 0) {
             alert("Professor title can not be empty");
-            temp=false;
+            temp = false;
         }
-        if(name.toString().length===0){
+        if (name.toString().length === 0) {
             alert("Professor name can not be empty");
-            temp=false;
+            temp = false;
         }
-        if(dept.toString().length>4){
+        if (dept.toString().length > 4) {
             alert("Department name must be 4 characters and not empty");
-            temp=false;
+            temp = false;
         }
-        if(salary.toString().length===0){
+        if (salary.toString().length === 0) {
             alert("Salary can not be empty");
-            temp=false;
-        }
-        else if(salary.toString().length<5 || salary.toString().length>7){
+            temp = false;
+        } else if (salary.toString().length < 5 || salary.toString().length > 7) {
             alert("Salary are not between 1,000 and 9,999,999");
-            temp=false;
+            temp = false;
         }
         return temp;
     }
@@ -552,28 +543,27 @@ Created by Michael Levi & Jian Hui Mai
 </form>
 
 <script>
-    function checkDeptForm(){
-        let dept= document.getElementById('department_department').value;
-        let chair= document.getElementById('department_chair').value;
-        let budget= document.getElementById('department_budget').value;
+    function checkDeptForm() {
+        let dept = document.getElementById('department_department').value;
+        let chair = document.getElementById('department_chair').value;
+        let budget = document.getElementById('department_budget').value;
 
-        let temp=true;
+        let temp = true;
 
-        if(dept.toString().length!=4){
+        if (dept.toString().length != 4) {
             alert("Department name has to be four characters and not empty");
-            temp=false;
+            temp = false;
         }
-        if(chair.toString().length===0){
+        if (chair.toString().length === 0) {
             alert("The name of the department chair can not be empty");
-            temp=false;
+            temp = false;
         }
-        if(budget.toString().length===0){
+        if (budget.toString().length === 0) {
             alert("Budget can not be empty");
-            temp=false;
-        }
-        else if(budget<0){
+            temp = false;
+        } else if (budget < 0) {
             alert("Money can not be negative");
-            temp=false;
+            temp = false;
         }
         return temp;
     }
@@ -602,43 +592,41 @@ Created by Michael Levi & Jian Hui Mai
 <script>
     function checkTPForm() {
         var emplid = document.getElementById('TuitionPayments_emplid').value;
-        var grantMoney= document.getElementById('TuitionPayment_amountPaid').value;
+        var grantMoney = document.getElementById('TuitionPayment_amountPaid').value;
         var dateApplied = document.getElementById('TuitionPayment_datePaid').value;
 
-        let temp=true;
+        let temp = true;
 
         if (emplid.toString().length === 0) {
             alert("Enter an EMPLID");
-            temp=false;
+            temp = false;
         } else if (emplid.toString().length != 8) {
             alert("Invalid EMPLID");
-            temp=false;
+            temp = false;
         }
-        if(grantMoney.toString().length===0){
+        if (grantMoney.toString().length === 0) {
             alert("Amount paid in tuition can not be empty");
-            temp=false;
-        }
-        else if (grantMoney < 0) {
+            temp = false;
+        } else if (grantMoney < 0) {
             alert("Money can not be negative");
-            temp=false;
+            temp = false;
         }
         var today = new Date();
         var year = dateApplied.toString().substring(0, 4);
         var month = dateApplied.toString().substring(5, 7);
         var day = dateApplied.toString().substring(8, 10);
-        if(dateApplied.toString().length===0){
+        if (dateApplied.toString().length === 0) {
             alert("Date paid of tuition can not be empty");
-            temp=false;
-        }
-        else if (year > today.getFullYear()) {
+            temp = false;
+        } else if (year > today.getFullYear()) {
             alert("Date can not be in the future");
-            temp= false;
+            temp = false;
         } else if (month > today.getMonth()) {
             alert("Date can not be in the future");
-            temp= false;
+            temp = false;
         } else if (month < today.getMonth() && day > today.getDay()) {
             alert("Date can not be in the future");
-            temp= false;
+            temp = false;
         }
         return temp;
     }
@@ -671,20 +659,32 @@ Created by Michael Levi & Jian Hui Mai
         var emplid = document.getElementById('FinancialAid_emplid').value;
         var grantMoney = document.getElementById('FinancialAid_grantMoney').value;
         var dateApplied = document.getElementById('FinancialAid_dateApplied').value;
+        var grantName = document.getElementById('FinancialAid_grantName').value;
 
-        let temp=true;
+        let temp = true;
 
-        if(emplid.toString().length===0) {
+        if (emplid.toString().length === 0) {
             alert("Enter an EMPLID");
-            temp=false;
-        }
-        else if (emplid.toString().length != 8){
+            temp = false;
+        } else if (emplid.toString().length != 8) {
             alert("Invalid EMPLID");
-            temp=false;
+            temp = false;
+        }
+        if (grantMoney.toString().length === 0 && (grantName.toString().length != 0 || dateApplied.toString().length != 0)) {
+            alert("Grant amount can not be empty");
+            temp = false;
+        }
+        if (grantName.toString().length === 0 && (grantMoney.toString().length != 0 || dateApplied.toString().length != 0){
+            alert("Grant name can not be empty");
+            temp = false;
+        }
+        if (dateApplied.toString().length === 0 && (grantMoney.toString().length != 0 || grantName.toString().length != 0)) {
+            alert("Date applied of financial aid can not be empty");
+            temp = false;
         }
         if (grantMoney < 0) {
             alert("Money can not be negative");
-            temp=false;
+            temp = false;
         }
         var today = new Date();
         var year = dateApplied.toString().substring(0, 4);
@@ -692,13 +692,13 @@ Created by Michael Levi & Jian Hui Mai
         var day = dateApplied.toString().substring(8, 10);
         if (year > today.getFullYear()) {
             alert("Date can not be in the future");
-            temp=false;
-        } else if (month > today.getMonth() && year==today.getFullYear()) {
+            temp = false;
+        } else if (month > today.getMonth() && year == today.getFullYear()) {
             alert("Date can not be in the future");
-            temp=false;
-        } else if (month < today.getMonth() && day > today.getDay() && year==today.getFullYear()) {
+            temp = false;
+        } else if (month < today.getMonth() && day > today.getDay() && year == today.getFullYear()) {
             alert("Date can not be in the future");
-            temp=false;
+            temp = false;
         }
         return temp;
     }
