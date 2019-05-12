@@ -10,7 +10,7 @@ public class Course {
     String end_time;
     String room;
     int num_credits;
-    String section;
+    String sections;
     String mode_inst;
     int capacity;
     String semester;
@@ -88,12 +88,12 @@ public class Course {
         this.num_credits = num_credits;
     }
 
-    public String getSection() {
-        return section;
+    public String getSections() {
+        return sections;
     }
 
-    public void setSection(String section) {
-        this.section = section;
+    public void setSections(String sections) {
+        this.sections = sections;
     }
 
     public String getMode_inst() {

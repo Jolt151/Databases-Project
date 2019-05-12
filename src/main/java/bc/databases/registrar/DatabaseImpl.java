@@ -154,7 +154,7 @@ public class DatabaseImpl {
                 course.setEnd_time(resultSet.getString("END_TIME"));
                 course.setRoom(resultSet.getString("ROOM"));
                 course.setNum_credits(resultSet.getInt("NUM_CREDITS"));
-                course.setSection(resultSet.getString("SECTIONS"));
+                course.setSections(resultSet.getString("SECTIONS"));
                 course.setMode_inst(resultSet.getString("MODE_INST"));
                 course.setCapacity(resultSet.getInt("CAPACITY"));
                 course.setSemester(resultSet.getString("SEMESTER"));
