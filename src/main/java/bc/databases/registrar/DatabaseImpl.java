@@ -34,12 +34,12 @@ public class DatabaseImpl {
 
     public int addCourse(int class_number, String dept, int course_number, String class_title,
                          String instructor_name, String beginning_time, String end_time, String room,
-                         int num_credits, String section, String mode_inst, int capacity, String semester, String si){
+                         int num_credits, String sections, String mode_inst, int capacity, String semester, String si){
         return jdbcTemplate.update("INSERT INTO course (class_number, dept, course_number, " +
-                "class_title, instructor_name, beginning_time, end_time, room, num_credits, section, " +
+                "class_title, instructor_name, beginning_time, end_time, room, num_credits, sections, " +
                 "mode_inst, capacity, semester, si) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 class_number, dept, course_number, class_title, instructor_name, beginning_time, end_time,
-                room, num_credits, section, mode_inst, capacity, semester, si
+                room, num_credits, sections, mode_inst, capacity, semester, si
                 );
     }
 
@@ -154,7 +154,7 @@ public class DatabaseImpl {
                 course.setEnd_time(resultSet.getString("END_TIME"));
                 course.setRoom(resultSet.getString("ROOM"));
                 course.setNum_credits(resultSet.getInt("NUM_CREDITS"));
-                course.setSection(resultSet.getString("SECTION"));
+                course.setSection(resultSet.getString("SECTIONS"));
                 course.setMode_inst(resultSet.getString("MODE_INST"));
                 course.setCapacity(resultSet.getInt("CAPACITY"));
                 course.setSemester(resultSet.getString("SEMESTER"));

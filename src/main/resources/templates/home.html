@@ -101,11 +101,18 @@ Created by Michael Levi & Jian Hui Mai
     <input type="button" value="Submit" onclick="
 
     var selectedGender;
+    var empty=false;
         if(document.getElementById('StudentForm_Male').checked){
             selectedGender=document.getElementById('StudentForm_Male').value;
         }
-        else selectedGender=document.getElementById('StudentForm_Female').value;
-    if(checkStudentForm()===true){
+        else if(document.getElementById('StudentForm_Female').checked){
+            selectedGender=document.getElementById('StudentForm_Female').value;
+        }
+        else {
+            alert('Select a Gender');
+            empty=true;
+        }
+    if(checkStudentForm()===true && empty===false){
      let arr = ['emplid=' + document.getElementById('StudentForm_emplid').value,
      'last_name=' + document.getElementById('StudentForm_ln').value,
      'first_name=' + document.getElementById('StudentForm_fn').value,
@@ -125,13 +132,43 @@ Created by Michael Levi & Jian Hui Mai
 <script>
     function checkStudentForm(){
         var emplid= document.getElementById('StudentForm_emplid').value;
+        var ln=document.getElementById('StudentForm_ln').value;
+        var fn=document.getElementById('StudentForm_fn').value;
         var dob=document.getElementById('StudentForm_dob').value;
         var credits=document.getElementById('StudentForm_credits').value;
         var ut= document.getElementById('StudentForm_ut').value;
         var ss=document.getElementById('StudentForm_ss').value;
         var eg=document.getElementById('StudentForm_eg').value;
+        var email=document.getElementById('StudentForm_email').value;
+        var phone=document.getElementById('StudentForm_phone').value;
+        var address=document.getElementById('StudentForm_address').value;
+        var major=document.getElementById('StudentForm_major').value;
 
         let temp=true;
+
+        if(email.toString().length===0){
+            alert("Please enter an email");
+            temp=false;
+        }
+
+        if(phone.toString().length===0){
+            alert("Please enter a phone number");
+            temp=false;
+        }
+        else if(phone.toString().length!=10){
+            alert("Number is invalid format must be 0123456789");
+            temp=false;
+        }
+
+        if(address.toString().length===0){
+            alert("Please enter an address");
+            temp=false;
+        }
+
+        if(major.toString().length===0){
+            alert("Please enter a major");
+            temp=false;
+        }
 
         if (emplid.toString().length === 0) {
             alert("Enter an EMPLID");
@@ -141,11 +178,25 @@ Created by Michael Levi & Jian Hui Mai
             temp=false;
         }
 
+        if(ln.toString().length===0){
+            alert("Last Name can not be empty");
+            temp=false;
+        }
+
+        if(fn.toString().length===0){
+            alert("First Name can not be empty");
+            temp=false;
+        }
+
         var today = new Date();
         var year = dob.toString().substring(0, 4);
         var month = dob.toString().substring(5, 7);
         var day = dob.toString().substring(8, 10);
-        if (year > today.getFullYear()) {
+        if(dob.toString().length===0){
+            alert("Date of birth can not be empty");
+            temp=false;
+        }
+        else if (year > today.getFullYear()) {
             alert("Date can not be in the future");
             temp=false;
         } else if (month > today.getMonth() && year==today.getFullYear()) {
@@ -164,7 +215,15 @@ Created by Michael Levi & Jian Hui Mai
             alert("Unpaid Tuition can not be less than 0");
             temp = false;
         }
-        if(ss.toString().length===9){
+        else if(ut.toString().length===0){
+            alert("Tuition can not be empty");
+            temp=false;
+        }
+        if(ss.toString().length===0){
+            alert("Must enter a starting semester");
+            temp=false;
+        }
+        else if(ss.toString().length===9){
             var tempString=ss.toString().substr(0,3);
             for(let i =0; i<3; i++){
                 if(tempString.charAt(i)!=ss.toString().charAt(i)){
@@ -185,7 +244,11 @@ Created by Michael Levi & Jian Hui Mai
         var year1 = eg.toString().substring(0, 4);
         var month1 = eg.toString().substring(5, 7);
         var day1 = eg.toString().substring(8, 10);
-        if (year1 > today.getFullYear()) {
+        if(eg.toString().length===0) {
+            alert("Must enter the expect graduation date");
+            temp=false;
+        }
+        else if (year1 > today.getFullYear()) {
             alert("Date can not be in the future");
             temp=false;
         } else if (month1 > today.getMonth() && year==today.getFullYear()) {
@@ -253,18 +316,72 @@ Created by Michael Levi & Jian Hui Mai
         var classNum= document.getElementById('CourseForm_classNumber').value;
         var courseNum=document.getElementById('CourseForm_courseNum').value;
         var credits= document.getElementById('CourseForm_numCredits').value;
+        var dept = document.getElementById('CourseForm_dept').value;
+        var ct=document.getElementById('CourseForm_classTitle').value;
+        var in1=document.getElementById('CourseForm_instructorName').value;
+        var bt=document.getElementById('CourseForm_beginningTime').value;
+        var et=document.getElementById('CourseForm_endTime').value;
+        var room=document.getElementById('CourseForm_room').value;
+        var section=document.getElementById('CourseForm_section').value;
+        var modInst=document.getElementById('CourseForm_modeInst').value;
+        var capacity=document.getElementById('CourseForm_capacity').value;
+        var semester=document.getElementById('CourseForm_semester').value;
 
         let temp=true;
 
+        if(dept.toString().length===0){
+            alert("Department Name  can not be empty");
+            temp=false;
+        }
+        if(semester.toString().length===0){
+            alert("Semester can not be empty");
+            temp=false;
+        }
+        if(ct.toString().length===0){
+            alert("Class title can not be empty");
+            temp=false;
+        }
+        if(in1.toString().length===0){
+            alert("Instructor Name can not be empty");
+            temp=false;
+        }
+        if(capacity.toString().length===0){
+            alert("Class capacity can not be empty");
+            temp=false;
+        }
+        if(bt.toString().length===0){
+            alert("Beginning Time can not be empty");
+            temp=false;
+        }
+        if(et.toString().length===0){
+            alert("Ending Time can not be empty");
+            temp=false;
+        }
+        if(room.toString().length===0){
+            alert("Room can not be empty");
+            temp=false;
+        }
+        if(section.toString().length===0){
+            alert("Section can not be empty");
+            temp=false;
+        }
         if(classNum.toString().length!=5){
-            alert("Class number must be 5 digits");
+            alert("Class number must be 5 digits and not empty");
+            temp=false;
+        }
+        if(modInst.toString().length===0){
+            alert("Mode of instruction can not be empty");
             temp=false;
         }
         if(courseNum.toString().length!=4){
-            alert("Course number must be 4 digits");
+            alert("Course number must be 4 digits and not empty");
             temp=false;
         }
-        if(credits>5 || credits<1){
+        if(credits.toString().length===0){
+            alert("Please enter number of credits");
+            temp=false;
+        }
+        else if(credits>5 || credits<1){
             alert("Credits must be between 1 and 5");
             temp=false;
         }
@@ -313,20 +430,28 @@ Created by Michael Levi & Jian Hui Mai
             temp=false;
         }
         let letter= grade.toString().charAt(0);
-        if(letter!='A' || letter!='B' || letter!='C' || letter!='D' || letter!='F'){
+        if(grade.toString().length===0){
+            alert("Please enter a grade");
+            temp=false;
+        }
+        else if(letter!='A' || letter!='B' || letter!='C' || letter!='D' || letter!='F'){
             alert("Invalid Grade");
             temp=false;
         }
-        if(credits >1 || credits <5){
+        if(credits.toString().length===0){
+            alert("Please enter number of credits");
+            temp=false;
+        }
+        else if(credits >1 || credits <5){
             alert("Invalid Credits");
             temp=false;
         }
         if(dept.toString().length!=4){
-            alert('Department name must be four letters');
+            alert('Department name must be four letters and not empty');
             temp=false;
         }
         if(classNum.toString().length!=5){
-            alert('Class number must be 5 digits');
+            alert('Class number must be 5 digits and not empty');
             temp=false;
         }
         return temp;
@@ -353,12 +478,18 @@ Created by Michael Levi & Jian Hui Mai
     <input data="number" minlength="5" maxlength="7" id="instructor_salary"><br>
     <input type="button" value="Submit" onclick="
         var selectedGender;
+        var empty=false;
         if(document.getElementById('instructor_male').checked){
             selectedGender=document.getElementById('instructor_male').value;
         }
-        else selectedGender=document.getElementById('instructor_female').value;
+        else if(document.getElementById('instructor_female').checked)
+            selectedGender=document.getElementById('instructor_female').value;
+        else {
+            alert('Please select a gender');
+            empty=true;
+        }
 
-        if(checkInstForm()===true){
+        if(checkInstForm()===true && empty===false){
         let arr=['title=' + document.getElementById('instructor_title').value,
         'instructor_name=' + document.getElementById('instructor_name').value,
         'gender=' + selectedGender,
@@ -378,19 +509,23 @@ Created by Michael Levi & Jian Hui Mai
 
         var temp=true;
 
-        if(title.toString().length>25){
-            alert("Title is too long");
+        if(title.toString().length===0){
+            alert("Professor title can not be empty");
             temp=false;
         }
-        if(name.toString().length>50){
-            alert("Name is too long");
+        if(name.toString().length===0){
+            alert("Professor name can not be empty");
             temp=false;
         }
         if(dept.toString().length>4){
-            alert("Department name is not the right size");
+            alert("Department name must be 4 characters and not empty");
             temp=false;
         }
-        if(salary.toString().length<5 || salary.toString().length>7){
+        if(salary.toString().length===0){
+            alert("Salary can not be empty");
+            temp=false;
+        }
+        else if(salary.toString().length<5 || salary.toString().length>7){
             alert("Salary are not between 1,000 and 9,999,999");
             temp=false;
         }
@@ -425,14 +560,18 @@ Created by Michael Levi & Jian Hui Mai
         let temp=true;
 
         if(dept.toString().length!=4){
-            alert("Invalid Department Name");
+            alert("Department name has to be four characters and not empty");
             temp=false;
         }
-        if(chair.toString().length>50){
-            alert("Name exceeds allowed characters");
+        if(chair.toString().length===0){
+            alert("The name of the department chair can not be empty");
             temp=false;
         }
-        if(budget<0){
+        if(budget.toString().length===0){
+            alert("Budget can not be empty");
+            temp=false;
+        }
+        else if(budget<0){
             alert("Money can not be negative");
             temp=false;
         }
@@ -475,7 +614,11 @@ Created by Michael Levi & Jian Hui Mai
             alert("Invalid EMPLID");
             temp=false;
         }
-        if (grantMoney < 0) {
+        if(grantMoney.toString().length===0){
+            alert("Amount paid in tuition can not be empty");
+            temp=false;
+        }
+        else if (grantMoney < 0) {
             alert("Money can not be negative");
             temp=false;
         }
@@ -483,7 +626,11 @@ Created by Michael Levi & Jian Hui Mai
         var year = dateApplied.toString().substring(0, 4);
         var month = dateApplied.toString().substring(5, 7);
         var day = dateApplied.toString().substring(8, 10);
-        if (year > today.getFullYear()) {
+        if(dateApplied.toString().length===0){
+            alert("Date paid of tuition can not be empty");
+            temp=false;
+        }
+        else if (year > today.getFullYear()) {
             alert("Date can not be in the future");
             temp= false;
         } else if (month > today.getMonth()) {

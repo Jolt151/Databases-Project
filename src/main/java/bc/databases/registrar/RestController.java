@@ -44,13 +44,13 @@ public class RestController {
                          @RequestParam(name = "end_time", required = true) String end_time,
                          @RequestParam(name = "room", required = true) String room,
                          @RequestParam(name = "num_credits", required = true) int num_credits,
-                         @RequestParam(name = "section", required = true) String section,
+                         @RequestParam(name = "sections", required = true) String sections,
                          @RequestParam(name = "mode_inst", required = true) String mode_inst,
                          @RequestParam(name = "capacity", required = true) int capacity,
                          @RequestParam(name = "semester", required = true) String semester,
                          @RequestParam(name = "si", required = false) String si){
         return database.addCourse(class_number, dept, course_number, class_title, instructor_name,
-                beginning_time, end_time, room, num_credits, section, mode_inst, capacity, semester, si);
+                beginning_time, end_time, room, num_credits, sections, mode_inst, capacity, semester, si);
     }
 
     @PostMapping("/rest/addRegisteredClass")
