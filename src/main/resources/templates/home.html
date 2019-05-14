@@ -241,16 +241,16 @@ Created by Michael Levi & Jian Hui Mai
         var month1 = eg.toString().substring(5, 7);
         var day1 = eg.toString().substring(8, 10);
         if (eg.toString().length === 0) {
-            alert("Must enter the expect graduation date");
+            alert("Must enter the expected graduation date");
             temp = false;
-        } else if (year1 > today.getFullYear()) {
-            alert("Date can not be in the future");
+        } else if (year1 < today.getFullYear()) {
+            alert("Date can not be in the past");
             temp = false;
-        } else if (month1 > today.getMonth() && year == today.getFullYear()) {
-            alert("Date can not be in the future");
+        } else if (month1 < today.getMonth() && year == today.getFullYear()) {
+            alert("Date can not be in the past");
             temp = false;
-        } else if (month1 < today.getMonth() && day1 > today.getDay() && year1 == today.getFullYear()) {
-            alert("Date can not be in the future");
+        } else if (month1 > today.getMonth() && day1 < today.getDay() && year1 == today.getFullYear()) {
+            alert("Date can not be in the past");
             temp = false;
         }
         return temp;
@@ -434,7 +434,7 @@ Created by Michael Levi & Jian Hui Mai
         if (credits.toString().length === 0) {
             alert("Please enter number of credits");
             temp = false;
-        } else if (credits > 1 || credits < 5) {
+        } else if (credits < 1 || credits > 5) {
             alert("Invalid Credits");
             temp = false;
         }
