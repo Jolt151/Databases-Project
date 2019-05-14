@@ -21,7 +21,7 @@ public class RestController {
     public int addStudent(@RequestParam(name = "emplid", required = true) int emplid,
                           @RequestParam(name = "last_name", required = true) String last_name,
                           @RequestParam(name = "first_name", required = true) String first_name,
-                          @RequestParam(name = "dob", required = true) Date dob,
+                          @RequestParam(name = "dob", required = true)  @DateTimeFormat(pattern="yyyy-MM-dd") Date dob,
                           @RequestParam(name = "credits", required = true) int credits,
                           @RequestParam(name = "gender", required = true) String gender,
                           @RequestParam(name = "unpaid_tuition", required = true) int unpaid_tuition,
@@ -44,7 +44,7 @@ public class RestController {
                          @RequestParam(name = "end_time", required = true) String end_time,
                          @RequestParam(name = "room", required = true) String room,
                          @RequestParam(name = "num_credits", required = true) int num_credits,
-                         @RequestParam(name = "sections", required = true) String sections,
+                         @RequestParam(name = "section", required = true) String sections,
                          @RequestParam(name = "mode_inst", required = true) String mode_inst,
                          @RequestParam(name = "capacity", required = true) int capacity,
                          @RequestParam(name = "semester", required = true) String semester,
@@ -82,7 +82,7 @@ public class RestController {
     @PostMapping("/rest/addTuitionPayment")
     public int addTuitionPayment(@RequestParam(name = "emplid", required = true) int emplid,
                                  @RequestParam(name = "amount_paid", required = true) int amount_paid,
-                                 @RequestParam(name = "date_paid", required = true) Date date_paid){
+                                 @RequestParam(name = "date_paid", required = true) @DateTimeFormat(pattern="yyyy-MM-dd") Date date_paid){
         return database.addTuitionPayment(emplid, amount_paid, date_paid);
     }
 

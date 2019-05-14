@@ -258,6 +258,53 @@ Created by Michael Levi & Jian Hui Mai
 </script>
 
 <br>
+<b>Department:</b>
+<form name="department" method="post">
+    Department:
+    <input id="department_department" type="data" maxlength="4" minlength="4"><br>
+    Department Chair:
+    <input id="department_chair" type="data" maxlength="50"><br>
+    Budget:
+    <input id="department_budget" type="number" min="0"><br>
+    <input type="button" value="Submit" onclick="
+    if(checkDeptForm()===true){
+            let arr = ['department=' + document.getElementById('department_department').value,
+            'department_chair=' + document.getElementById('department_chair').value,
+            'budget=' + document.getElementById('department_budget').value];
+            send('/rest/addDepartment', arr);
+    }">
+</form>
+
+<script>
+    function checkDeptForm() {
+        let dept = document.getElementById('department_department').value;
+        let chair = document.getElementById('department_chair').value;
+        let budget = document.getElementById('department_budget').value;
+
+        let temp = true;
+
+        if (dept.toString().length != 4) {
+            alert("Department name has to be four characters and not empty");
+            temp = false;
+        }
+        if (chair.toString().length === 0) {
+            alert("The name of the department chair can not be empty");
+            temp = false;
+        }
+        if (budget.toString().length === 0) {
+            alert("Budget can not be empty");
+            temp = false;
+        } else if (budget < 0) {
+            alert("Money can not be negative");
+            temp = false;
+        }
+        return temp;
+    }
+
+</script>
+
+
+<br>
 <b>Course Form:</b>
 <form name="CourseForm">
     Class Number:
@@ -409,7 +456,6 @@ Created by Michael Levi & Jian Hui Mai
 <script>
     function checkRCForm() {
         let emplid = document.getElementById('RegisteredClasses_emplid').value;
-        let grade = document.getElementById('RegisteredClasses_grade').value;
         let credits = document.getElementById('RegisteredClasses_credits').value;
         let dept = document.getElementById('RegisteredClasses_dept').value;
         let classNum = document.getElementById('RegisteredClasses_classNum').value;
@@ -421,14 +467,6 @@ Created by Michael Levi & Jian Hui Mai
             temp = false;
         } else if (emplid.toString().length != 8) {
             alert("Invalid EMPLID");
-            temp = false;
-        }
-        let letter = grade.toString().charAt(0);
-        if (grade.toString().length === 0) {
-            alert("Please enter a grade");
-            temp = false;
-        } else if (letter != 'A' || letter != 'B' || letter != 'C' || letter != 'D' || letter != 'F') {
-            alert("Invalid Grade");
             temp = false;
         }
         if (credits.toString().length === 0) {
@@ -524,51 +562,6 @@ Created by Michael Levi & Jian Hui Mai
     }
 </script>
 
-<br>
-<b>Department:</b>
-<form name="department" method="post">
-    Department:
-    <input id="department_department" type="data" maxlength="4" minlength="4"><br>
-    Department Chair:
-    <input id="department_chair" type="data" maxlength="50"><br>
-    Budget:
-    <input id="department_budget" type="number" min="0"><br>
-    <input type="button" value="Submit" onclick="
-    if(checkDeptForm()===true){
-            let arr = ['department=' + document.getElementById('department_department').value,
-            'department_chair=' + document.getElementById('department_chair').value,
-            'budget=' + document.getElementById('department_budget').value];
-            send('/rest/addDepartment', arr);
-    }">
-</form>
-
-<script>
-    function checkDeptForm() {
-        let dept = document.getElementById('department_department').value;
-        let chair = document.getElementById('department_chair').value;
-        let budget = document.getElementById('department_budget').value;
-
-        let temp = true;
-
-        if (dept.toString().length != 4) {
-            alert("Department name has to be four characters and not empty");
-            temp = false;
-        }
-        if (chair.toString().length === 0) {
-            alert("The name of the department chair can not be empty");
-            temp = false;
-        }
-        if (budget.toString().length === 0) {
-            alert("Budget can not be empty");
-            temp = false;
-        } else if (budget < 0) {
-            alert("Money can not be negative");
-            temp = false;
-        }
-        return temp;
-    }
-
-</script>
 
 <br>
 <b>Tuition Payments:</b>
@@ -615,16 +608,13 @@ Created by Michael Levi & Jian Hui Mai
         var year = dateApplied.toString().substring(0, 4);
         var month = dateApplied.toString().substring(5, 7);
         var day = dateApplied.toString().substring(8, 10);
-        if (dateApplied.toString().length === 0) {
-            alert("Date paid of tuition can not be empty");
-            temp = false;
-        } else if (year > today.getFullYear()) {
+        if (year > today.getFullYear()) {
             alert("Date can not be in the future");
             temp = false;
-        } else if (month > today.getMonth()) {
+        } else if (month > today.getMonth() && year == today.getFullYear()) {
             alert("Date can not be in the future");
             temp = false;
-        } else if (month < today.getMonth() && day > today.getDay()) {
+        } else if (month < today.getMonth() && day > today.getDay() && year == today.getFullYear()) {
             alert("Date can not be in the future");
             temp = false;
         }
@@ -646,7 +636,7 @@ Created by Michael Levi & Jian Hui Mai
     <input type="button" value="Submit" onclick="
     checkFinAidForm();
     if(checkFinAidForm()===true){
-    let arr=['empid=' + document.getElementById('FinancialAid_emplid').value,
+    let arr=['emplid=' + document.getElementById('FinancialAid_emplid').value,
     'grant_money=' + document.getElementById('FinancialAid_grantMoney').value,
     'grant_name=' + document.getElementById('FinancialAid_grantName').value,
     'date_applied=' + document.getElementById('FinancialAid_dateApplied').value];
@@ -674,7 +664,7 @@ Created by Michael Levi & Jian Hui Mai
             alert("Grant amount can not be empty");
             temp = false;
         }
-        if (grantName.toString().length === 0 && (grantMoney.toString().length != 0 || dateApplied.toString().length != 0){
+        if (grantName.toString().length === 0 && (grantMoney.toString().length != 0 || dateApplied.toString().length != 0)){
             alert("Grant name can not be empty");
             temp = false;
         }

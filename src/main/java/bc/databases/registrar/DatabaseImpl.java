@@ -28,16 +28,16 @@ public class DatabaseImpl {
                           String starting_semester, String expected_graduation, String address, String major){
         return jdbcTemplate.update("INSERT INTO student (emplid, last_name, first_name, dob, credits, gender, unpaid_tuition, email, phone, starting_semester," +
                         " expected_graduation, address, major)" +
-                        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+                        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 emplid, last_name, first_name, dob, credits, gender, unpaid_tuition, email, phone, starting_semester, expected_graduation, address, major);
     }
 
     public int addCourse(int class_number, String dept, int course_number, String class_title,
                          String instructor_name, String beginning_time, String end_time, String room,
                          int num_credits, String sections, String mode_inst, int capacity, String semester, String si){
-        return jdbcTemplate.update("INSERT INTO course (class_number, dept, course_number, " +
-                "class_title, instructor_name, beginning_time, end_time, room, num_credits, sections, " +
-                "mode_inst, capacity, semester, si) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        return jdbcTemplate.update("INSERT INTO course (class_number, DEPARTMENT_NAME, course_number, " +
+                "TITLE, instructor_name, TIME_BEGIN, TIME_END, room, CREDITS, SECTIONs, " +
+                "MODE_OF_INSTRUCTION, class_capacity, semester, SPECIAL_INFORMATION) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 class_number, dept, course_number, class_title, instructor_name, beginning_time, end_time,
                 room, num_credits, sections, mode_inst, capacity, semester, si
                 );
@@ -146,19 +146,19 @@ public class DatabaseImpl {
             public Course mapRow(ResultSet resultSet, int i) throws SQLException {
                 Course course = new Course();
                 course.setClass_number(resultSet.getInt("CLASS_NUMBER"));
-                course.setDept(resultSet.getString("DEPT"));
+                course.setDept(resultSet.getString("DEPARTMENT_NAME"));
                 course.setCourse_number(resultSet.getInt("COURSE_NUMBER"));
-                course.setClass_title(resultSet.getString("CLASS_TITLE"));
+                course.setClass_title(resultSet.getString("TITLE"));
                 course.setInstructor_name(resultSet.getString("INSTRUCTOR_NAME"));
-                course.setBeginning_time(resultSet.getString("BEGINNING_TIME"));
-                course.setEnd_time(resultSet.getString("END_TIME"));
+                course.setBeginning_time(resultSet.getString("TIME_BEGIN"));
+                course.setEnd_time(resultSet.getString("TIME_END"));
                 course.setRoom(resultSet.getString("ROOM"));
-                course.setNum_credits(resultSet.getInt("NUM_CREDITS"));
+                course.setNum_credits(resultSet.getInt("CREDITS"));
                 course.setSections(resultSet.getString("SECTIONS"));
-                course.setMode_inst(resultSet.getString("MODE_INST"));
-                course.setCapacity(resultSet.getInt("CAPACITY"));
+                course.setMode_inst(resultSet.getString("MODE_OF_INSTRUCTION"));
+                course.setCapacity(resultSet.getInt("CLASS_CAPACITY"));
                 course.setSemester(resultSet.getString("SEMESTER"));
-                course.setSi(resultSet.getString("SI"));
+                course.setSi(resultSet.getString("SPECIAL_INFORMATION"));
                 return course;
             }
         });

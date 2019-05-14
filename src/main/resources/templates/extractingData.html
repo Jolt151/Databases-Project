@@ -158,7 +158,7 @@ Created by Michael Levi & Jian Hui Mai
         <td th:text="${c.end_time}">Text ...</td>
         <td th:text="${c.room}">Text ...</td>
         <td th:text="${c.num_credits}">Text ...</td>
-        <td th:text="${c.section}">Text ...</td>
+        <td th:text="${c.sections}">Text ...</td>
         <td th:text="${c.mode_inst}">Text ...</td>
         <td th:text="${c.capacity}">Text ...</td>
         <td th:text="${c.semester}">Text ...</td>
@@ -207,7 +207,7 @@ Created by Michael Levi & Jian Hui Mai
         <td th:text="${i.instructor_name}">Text ...</td>
         <td th:text="${i.gender}">Text ...</td>
         <td th:text="${i.department}">Text ...</td>
-        <td th:text="${c.salary}">Text ...</td>
+        <td th:text="${i.salary}">Text ...</td>
     </tr>
     </tbody>
 </table>
@@ -241,7 +241,7 @@ Created by Michael Levi & Jian Hui Mai
     </tr>
     </thead>
     <tbody>
-    <tr th:each="fin : ${finAids}">
+    <tr th:each="fin : ${finAid}">
         <td th:text="${fin.emplid}">Text ...</td>
         <td th:text="${fin.grant_money}">Text ...</td>
         <td th:text="${fin.grant_name}">Text ...</td>
